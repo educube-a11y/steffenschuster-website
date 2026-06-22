@@ -32,14 +32,14 @@ const offers = [
 
 const refs = [
   {
-    name: "Eins Energie",
-    body: "Digitale Lernformate und Begleitung in der Transformation des Chemnitzer Kraftwerkstandorts.",
-    tag: "Energie",
+    name: "Bildungszentrum Limmattal",
+    body: "Digitale Lernformate und Begleitung in der Transformation zum individualisierten und selbstgesteuerten Lernen.",
+    tag: "Bildung",
   },
   {
-    name: "Lineg",
-    body: "Organisationsentwicklung, Workshops und Befähigung der Mitarbeitenden auf allen Ebenen.",
-    tag: "Wasserwirtschaft",
+    name: "Berufsschule BS15",
+    body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe.",
+    tag: "Gesundheit",
   },
 ];
 
@@ -818,7 +818,7 @@ export default function Home() {
             }}
           >
             <a
-              href="mailto:kontakt@nora-ki.de"
+              href="mailto:info@steffenschuster.de"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -836,7 +836,7 @@ export default function Home() {
               Gespräch starten <span>→</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/steffenschuster"
+              href="https://www.linkedin.com/in/steffen-schuster-7297088b/"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -884,7 +884,7 @@ export default function Home() {
                 letterSpacing: "1px",
               }}
             >
-              kontakt@nora-ki.de
+              info@steffenschuster.de
             </span>
           </div>
         </div>
