@@ -21,10 +21,63 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const SITE_URL = "https://www.steffenschuster.de";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Steffen Schuster — Lernen neu denken. Mit KI.",
   description:
-    "Pädagoge, KI-Pionier und Gestalter. Ich verbinde künstliche Intelligenz mit dem Lernen und entwickle die KI-Lernumgebung Nora-KI.",
+    "Pädagoge, KI-Pionier und Gestalter aus Hamburg. Ich verbinde künstliche Intelligenz mit dem Lernen und entwickle die KI-Lernumgebung Nora-KI.",
+  keywords: [
+    "KI-Beratung",
+    "KI-Training",
+    "Bildung",
+    "Pädagoge",
+    "Künstliche Intelligenz",
+    "Lernumgebung",
+    "Hamburg",
+    "Nora-KI",
+    "next:classroom",
+    "E-Learning",
+    "Organisationsentwicklung",
+  ],
+  authors: [{ name: "Steffen Schuster", url: SITE_URL }],
+  creator: "Steffen Schuster",
+  publisher: "Steffen Schuster",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    url: SITE_URL,
+    siteName: "Steffen Schuster",
+    title: "Steffen Schuster — Lernen neu denken. Mit KI.",
+    description:
+      "Pädagoge, KI-Pionier und Gestalter aus Hamburg. KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Steffen Schuster — Lernen neu denken. Mit KI.",
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Steffen Schuster — Lernen neu denken. Mit KI.",
+    description:
+      "Pädagoge, KI-Pionier und Gestalter aus Hamburg. KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung.",
+    images: ["/opengraph-image"],
+    creator: "@steffenschuster",
+  },
 };
 
 export default function RootLayout({

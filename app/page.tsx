@@ -84,6 +84,63 @@ const refs = [
 ];
 
 export default function Home() {
+  const jsonLdPerson = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Steffen Schuster",
+    jobTitle: "Pädagoge und KI-Berater",
+    url: "https://www.steffenschuster.de",
+    email: "info@steffenschuster.de",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Hamburg",
+      addressRegion: "HH",
+      addressCountry: "DE",
+    },
+    sameAs: [
+      "https://www.linkedin.com/in/steffen-schuster-7297088b/",
+      "https://www.nora-ki.de",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "edu:cube GmbH",
+      url: "https://www.nora-ki.de",
+    },
+    knowsAbout: [
+      "Künstliche Intelligenz",
+      "E-Learning",
+      "Digitale Lernumgebungen",
+      "Bildungstechnologie",
+      "Organisationsentwicklung",
+      "KI-Training",
+      "Facilitation",
+    ],
+  };
+
+  const jsonLdService = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Steffen Schuster — KI-Beratung & Bildung",
+    description:
+      "KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung für Unternehmen und Bildungseinrichtungen.",
+    url: "https://www.steffenschuster.de",
+    email: "info@steffenschuster.de",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Hamburg",
+      addressRegion: "HH",
+      addressCountry: "DE",
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Deutschland",
+    },
+    founder: {
+      "@type": "Person",
+      name: "Steffen Schuster",
+    },
+  };
+
   return (
     <div
       style={{
@@ -93,6 +150,14 @@ export default function Home() {
         overflowX: "hidden",
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
+      />
       <CustomCursor />
       <CursorTrail />
       <ScrollRevealInit />

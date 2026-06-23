@@ -58,7 +58,6 @@ export function HeroHeadline({ style }: { style?: React.CSSProperties }) {
   return (
     <h1
       ref={h1Ref}
-      data-reveal
       style={{
         fontFamily: "var(--font-cormorant), serif",
         fontWeight: 500,
