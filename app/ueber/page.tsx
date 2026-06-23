@@ -317,7 +317,7 @@ export default function UeberPage() {
               Seit über 20 Jahren entwickle ich Lernumgebungen und Konzepte,
               die Menschen wirklich weiterbringen. Mit KI entstehen daraus
               Systeme, die Lernende endlich so begleiten, wie es ein guter
-              Lehrer tut — individuell, geduldig, immer verfügbar.
+              Lerncoach tut — individuell, geduldig, immer verfügbar.
             </p>
             {/* Stats */}
             <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
@@ -359,7 +359,7 @@ export default function UeberPage() {
             }}
           >
             <Image
-              src="/portrait.jpg"
+              src="/portrait.png"
               alt="Steffen Schuster — Pädagoge und KI-Pionier aus Hamburg"
               fill
               style={{ objectFit: "cover", objectPosition: "center top" }}
