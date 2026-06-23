@@ -7,6 +7,9 @@ import { HeroParticles } from "@/components/HeroParticles";
 import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { TiltCard } from "@/components/TiltCard";
 import { CustomCursor } from "@/components/CustomCursor";
+import { CursorTrail } from "@/components/CursorTrail";
+import { HeroHeadline } from "@/components/HeroHeadline";
+import { NeuralCanvas } from "@/components/NeuralCanvas";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -91,6 +94,7 @@ export default function Home() {
       }}
     >
       <CustomCursor />
+      <CursorTrail />
       <ScrollRevealInit />
       <ScrollAnimations />
       <Nav />
@@ -117,10 +121,7 @@ export default function Home() {
               Pädagoge · KI-Pionier · Gestalter
             </span>
           </div>
-          <h1 data-reveal style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 500, fontSize: "clamp(48px, 8vw, 104px)", lineHeight: 0.98, letterSpacing: "-1px", color: "#fff", margin: "0 0 28px", maxWidth: "14ch" }}>
-            Lernen neu denken.<br />
-            <span style={{ fontStyle: "italic", color: ACCENT }}>Mit KI.</span>
-          </h1>
+          <HeroHeadline />
           <p data-reveal style={{ fontSize: "clamp(17px, 2vw, 21px)", lineHeight: 1.6, color: "rgba(255,255,255,0.82)", maxWidth: "52ch", margin: "0 0 42px", fontWeight: 400 }}>
             Ich verbinde künstliche Intelligenz mit dem Lernen — und erweitere analoge Lernerfahrungen um das, was KI möglich macht. Lernen ist nicht mein Beruf. Es ist meine Identität.
           </p>
@@ -180,9 +181,14 @@ export default function Home() {
                   ))}
                   <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 11.5, color: "rgba(255,255,255,0.4)", marginLeft: 12 }}>nora-ki.de</span>
                 </div>
-                <div style={{ aspectRatio: "4/3", background: "repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 14px, rgba(255,255,255,0.015) 14px 28px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14 }}>
-                  <LogoMark size={60} />
-                  <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: "rgba(255,255,255,0.45)", letterSpacing: "1px" }}>[ nora-ki.de ]</span>
+                <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden" }}>
+                  {/* Live neural activity visualization */}
+                  <NeuralCanvas />
+                  {/* Logo + label overlay */}
+                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, pointerEvents: "none" }}>
+                    <LogoMark size={60} />
+                    <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: "rgba(255,255,255,0.45)", letterSpacing: "1px" }}>[ nora-ki.de ]</span>
+                  </div>
                 </div>
               </div>
             </div>
