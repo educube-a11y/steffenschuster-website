@@ -46,7 +46,8 @@ export function Nav() {
         {(
           [
             ["#nora", "Nora-KI"],
-            ["#philosophie", "Haltung"],
+            ["#meilensteine", "Meilensteine"],
+            ["#auszeichnungen", "Auszeichnungen"],
             ["#angebot", "Angebot"],
           ] as const
         ).map(([href, label]) => (
