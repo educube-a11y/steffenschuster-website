@@ -310,10 +310,12 @@ export default function Home() {
 
           <div data-milestone-grid style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
             {milestones.map((m, i) => (
-              <div key={m.year} data-milestone-card style={{ position: "relative", padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
-                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
-                <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(255,255,255,0.55)", margin: 0 }}>{m.body}</p>
+              <div key={m.year} data-milestone-card style={{ position: "relative" }}>
+                <TiltCard style={{ padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", height: "100%" }}>
+                  <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(255,255,255,0.55)", margin: 0 }}>{m.body}</p>
+                </TiltCard>
               </div>
             ))}
           </div>
