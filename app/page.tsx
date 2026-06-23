@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { LogoMark } from "@/components/LogoMark";
 import { NetworkField } from "@/components/NetworkField";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
+import { HeroParticles } from "@/components/HeroParticles";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -102,11 +103,9 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, opacity: 0.5, pointerEvents: "none" }}>
-          <NetworkField seed={7} count={26} color="#ffffff" opacity={0.5} />
-        </div>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(80% 60% at 50% 110%, rgba(0,0,0,0.35), transparent)" }} />
-        <div style={{ position: "relative", maxWidth: 1180, margin: "0 auto", width: "100%" }}>
+        <HeroParticles />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(80% 60% at 50% 110%, rgba(0,0,0,0.35), transparent)", zIndex: 1 }} />
+        <div style={{ position: "relative", maxWidth: 1180, margin: "0 auto", width: "100%", zIndex: 2 }}>
           <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "7px 16px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.22)", background: "rgba(255,255,255,0.06)", marginBottom: 34 }}>
             <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
             <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase" }}>
@@ -129,7 +128,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div style={{ position: "absolute", bottom: 34, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)" }}>
+        <div style={{ position: "absolute", bottom: 34, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", zIndex: 2 }}>
           <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 11, letterSpacing: "2px" }}>SCROLL</span>
           <span style={{ width: 1, height: 38, background: "linear-gradient(rgba(255,255,255,0.5), transparent)", display: "block" }} />
         </div>
