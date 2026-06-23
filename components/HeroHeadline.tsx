@@ -17,6 +17,17 @@ function CharSpan({ ch }: { ch: string }) {
   );
 }
 
+// Wraps a word's chars in a nowrap container so words never break mid-character
+function WordGroup({ word }: { word: string }) {
+  return (
+    <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+      {word.split("").map((ch, i) => (
+        <CharSpan key={i} ch={ch} />
+      ))}
+    </span>
+  );
+}
+
 export function HeroHeadline({ style }: { style?: React.CSSProperties }) {
   const h1Ref = useRef<HTMLHeadingElement>(null);
 
@@ -24,35 +35,35 @@ export function HeroHeadline({ style }: { style?: React.CSSProperties }) {
     if (!h1Ref.current) return;
     const chars = [...h1Ref.current.querySelectorAll<HTMLElement>(".hero-char")];
 
-    // Reduced-motion: reveal instantly, no animation
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       chars.forEach((c) => { c.style.opacity = "1"; });
       return;
     }
 
-    // Scatter chars to random starting positions (synchronous, before paint)
+    // Scatter more dramatically so the build-up is clearly visible
     gsap.set(chars, {
-      y: () => gsap.utils.random(-30, 30),
-      x: () => gsap.utils.random(-18, 18),
-      rotation: () => gsap.utils.random(-14, 14),
-      filter: "blur(5px)",
+      y: () => gsap.utils.random(-50, 50),
+      x: () => gsap.utils.random(-30, 30),
+      rotation: () => gsap.utils.random(-20, 20),
+      filter: "blur(8px)",
       opacity: 0,
     });
 
-    // Animate each char into place with stagger
+    // Slow stagger (0.065s/char × 25 chars ≈ 1.6s sweep) — total ~2.3s
     gsap.to(chars, {
       y: 0,
       x: 0,
       rotation: 0,
       filter: "blur(0px)",
       opacity: 1,
-      duration: 0.62,
+      duration: 0.45,
       ease: "power3.out",
-      stagger: 0.023,
-      // Slight delay so hero canvas is already visible
-      delay: 0.15,
+      stagger: 0.065,
+      delay: 0.3,
     });
   }, []);
+
+  const line1Words = LINE1.split(" ");
 
   return (
     <h1
@@ -65,13 +76,20 @@ export function HeroHeadline({ style }: { style?: React.CSSProperties }) {
         letterSpacing: "-1px",
         color: "#fff",
         margin: "0 0 28px",
-        maxWidth: "14ch",
+        maxWidth: "none",
         ...style,
       }}
     >
-      {LINE1.split("").map((ch, i) => (
-        <CharSpan key={`l1-${i}`} ch={ch} />
-      ))}
+      {/* Each word is a nowrap group — spaces are separate CharSpans */}
+      {line1Words.flatMap((word, wi) => {
+        const items: React.ReactNode[] = [
+          <WordGroup key={`w-${wi}`} word={word} />,
+        ];
+        if (wi < line1Words.length - 1) {
+          items.push(<CharSpan key={`sp-${wi}`} ch=" " />);
+        }
+        return items;
+      })}
       <br />
       <span style={{ fontStyle: "italic", color: ACCENT }}>
         {LINE2.split("").map((ch, i) => (

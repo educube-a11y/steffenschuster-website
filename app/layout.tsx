@@ -89,6 +89,12 @@ export default function RootLayout({
       className={`${cormorant.variable} ${dmSans.variable} ${jetbrains.variable}`}
       style={{ scrollBehavior: "smooth" }}
     >
+      {/* Runs before first paint: prevents flash of wrong theme */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=(s==='dark'||(s===null&&d))?'dark':'light';}catch(e){}})();`,
+        }}
+      />
       <body style={{ margin: 0, WebkitFontSmoothing: "antialiased" }}>
         {children}
       </body>

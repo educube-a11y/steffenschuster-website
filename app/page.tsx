@@ -145,8 +145,8 @@ export default function Home() {
     <div
       style={{
         fontFamily: "var(--font-dm-sans), -apple-system, BlinkMacSystemFont, sans-serif",
-        color: "#16212e",
-        background: "#fafafa",
+        color: "var(--text-primary)",
+        background: "var(--page-bg)",
         overflowX: "hidden",
       }}
     >
@@ -262,7 +262,7 @@ export default function Home() {
       </section>
 
       {/* ── PHILOSOPHIE ── */}
-      <section id="philosophie" style={{ padding: "130px 40px", background: "#fafafa" }}>
+      <section id="philosophie" data-light-section style={{ padding: "130px 40px", background: "var(--page-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
             <div data-reveal data-parallax-portrait style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
@@ -284,7 +284,7 @@ export default function Home() {
               </p>
               <div data-reveal style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
                 {["Herzlichkeit", "Neugier", "Radikale Offenheit"].map((v) => (
-                  <span key={v} style={{ padding: "9px 18px", borderRadius: 100, border: "1px solid #d6dde4", fontSize: 14, fontWeight: 500, color: PRIMARY }}>{v}</span>
+                  <span key={v} className="value-tag" style={{ padding: "9px 18px", borderRadius: 100, border: "1px solid #d6dde4", fontSize: 14, fontWeight: 500, color: PRIMARY }}>{v}</span>
                 ))}
               </div>
             </div>
@@ -310,10 +310,12 @@ export default function Home() {
 
           <div data-milestone-grid style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
             {milestones.map((m, i) => (
-              <div key={m.year} data-milestone-card style={{ position: "relative", padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)" }}>
-                <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
-                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
-                <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(255,255,255,0.55)", margin: 0 }}>{m.body}</p>
+              <div key={m.year} data-milestone-card style={{ position: "relative" }}>
+                <TiltCard style={{ padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", height: "100%" }}>
+                  <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(255,255,255,0.55)", margin: 0 }}>{m.body}</p>
+                </TiltCard>
               </div>
             ))}
           </div>
@@ -343,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* ── AUSZEICHNUNGEN ── */}
-      <section id="auszeichnungen" style={{ padding: "130px 40px", background: "#f1f4f7" }}>
+      <section id="auszeichnungen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 70, alignItems: "center", marginBottom: 60 }}>
             <div>
@@ -359,7 +361,7 @@ export default function Home() {
               </p>
               <div data-reveal style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {awards.map((a) => (
-                  <div key={a.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderRadius: 12, background: "#fff", border: "1px solid #e4e9ee" }}>
+                  <div key={a.label} className="award-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderRadius: 12, background: "#fff", border: "1px solid #e4e9ee" }}>
                     <span style={{ fontSize: 15, fontWeight: 500, color: "#16212e" }}>{a.label}</span>
                     <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT }}>{a.year}</span>
                   </div>
@@ -386,7 +388,7 @@ export default function Home() {
       </section>
 
       {/* ── ANGEBOT ── */}
-      <section id="angebot" style={{ position: "relative", padding: "130px 40px", background: "#fafafa", overflow: "hidden" }}>
+      <section id="angebot" data-light-section style={{ position: "relative", padding: "130px 40px", background: "var(--page-bg)", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: "-15%", left: "-5%", width: "42%", opacity: 0.4, pointerEvents: "none" }}>
           <NetworkField seed={53} count={24} color={PRIMARY} opacity={0.5} />
         </div>
@@ -423,7 +425,7 @@ export default function Home() {
       </section>
 
       {/* ── REFERENZEN ── */}
-      <section id="referenzen" style={{ padding: "130px 40px", background: "#f1f4f7" }}>
+      <section id="referenzen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 70, alignItems: "center", marginBottom: 70 }}>
             <div>
@@ -443,12 +445,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div data-reveal style={{ fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8a97a6", marginBottom: 22 }}>
+          <div data-reveal className="refs-label" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8a97a6", marginBottom: 22 }}>
             Ausgewählte Referenzen
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {refs.map((ref) => (
-              <div key={ref.name} data-reveal style={{ borderRadius: 18, background: "#fff", border: "1px solid #e4e9ee", overflow: "hidden" }}>
+              <div key={ref.name} data-reveal className="ref-card" style={{ borderRadius: 18, background: "#fff", border: "1px solid #e4e9ee", overflow: "hidden" }}>
                 {ref.photo && (
                   <div style={{ position: "relative", aspectRatio: "16/7", overflow: "hidden" }}>
                     <Image src={ref.photo} alt={ref.name} fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />

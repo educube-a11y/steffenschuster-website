@@ -1,5 +1,6 @@
 "use client";
 import { LogoMark } from "./LogoMark";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   return (
@@ -42,7 +43,7 @@ export function Nav() {
           Steffen Schuster
         </span>
       </a>
-      <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
         {(
           [
             ["#nora", "Nora-KI"],
@@ -65,6 +66,7 @@ export function Nav() {
             {label}
           </a>
         ))}
+        <ThemeToggle />
         <a
           href="#kontakt"
           style={{
