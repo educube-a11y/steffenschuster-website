@@ -1,8 +1,20 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { LogoMark } from "./LogoMark";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const base = isHome ? "" : "/";
+
+  const mainLinks: [string, string][] = [
+    [`${base}#nora`, "Nora-KI"],
+    [`${base}#meilensteine`, "Meilensteine"],
+    [`${base}#auszeichnungen`, "Auszeichnungen"],
+    [`${base}#angebot`, "Angebot"],
+  ];
+
   return (
     <nav
       style={{
@@ -22,7 +34,7 @@ export function Nav() {
       }}
     >
       <a
-        href="#hero"
+        href="/"
         style={{
           display: "flex",
           alignItems: "center",
@@ -44,14 +56,7 @@ export function Nav() {
         </span>
       </a>
       <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-        {(
-          [
-            ["#nora", "Nora-KI"],
-            ["#meilensteine", "Meilensteine"],
-            ["#auszeichnungen", "Auszeichnungen"],
-            ["#angebot", "Angebot"],
-          ] as const
-        ).map(([href, label]) => (
+        {mainLinks.map(([href, label]) => (
           <a
             key={href}
             href={href}
@@ -66,9 +71,21 @@ export function Nav() {
             {label}
           </a>
         ))}
+        <a
+          href="/ueber"
+          style={{
+            color: pathname === "/ueber" ? "#ff9800" : "rgba(255,255,255,0.78)",
+            textDecoration: "none",
+            fontSize: 14.5,
+            fontWeight: pathname === "/ueber" ? 600 : 500,
+            letterSpacing: "0.2px",
+          }}
+        >
+          Über mich
+        </a>
         <ThemeToggle />
         <a
-          href="#kontakt"
+          href={`${base}#kontakt`}
           style={{
             display: "inline-flex",
             alignItems: "center",
