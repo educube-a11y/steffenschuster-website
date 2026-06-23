@@ -4,6 +4,7 @@ import { LogoMark } from "@/components/LogoMark";
 import { NetworkField } from "@/components/NetworkField";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { HeroParticles } from "@/components/HeroParticles";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -88,6 +89,7 @@ export default function Home() {
       }}
     >
       <ScrollRevealInit />
+      <ScrollAnimations />
       <Nav />
 
       {/* ── HERO ── */}
@@ -189,7 +191,7 @@ export default function Home() {
       <section id="philosophie" style={{ padding: "130px 40px", background: "#fafafa" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
           <div style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
-            <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
+            <div data-reveal data-parallax-portrait style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
               <Image src="/portrait.png" alt="Steffen Schuster im Gespräch" fill style={{ objectFit: "cover", objectPosition: "center top" }} />
             </div>
             <div>
@@ -232,9 +234,9 @@ export default function Home() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
+          <div data-milestone-grid style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
             {milestones.map((m, i) => (
-              <div key={m.year} data-reveal style={{ position: "relative", padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)" }}>
+              <div key={m.year} data-milestone-card style={{ position: "relative", padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)" }}>
                 <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
                 <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
                 <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "rgba(255,255,255,0.55)", margin: 0 }}>{m.body}</p>
@@ -244,7 +246,7 @@ export default function Home() {
 
           {/* next.classroom Bild + kiss-U */}
           <div style={{ display: "grid", gridTemplateColumns: "0.6fr 1fr", gap: 50, alignItems: "center" }}>
-            <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", boxShadow: "0 30px 60px rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)" }}>
+            <div data-reveal data-parallax-classroom style={{ position: "relative", borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", boxShadow: "0 30px 60px rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <Image src="/nextclassroom.png" alt="Steffen Schuster beim next.classroom" fill style={{ objectFit: "cover", objectPosition: "center" }} />
             </div>
             <div>
@@ -296,7 +298,7 @@ export default function Home() {
           </div>
 
           {/* Award-Foto BZLT */}
-          <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 20px 50px rgba(20,40,60,0.12)", aspectRatio: "21/9" }}>
+          <div data-reveal data-parallax-award style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 20px 50px rgba(20,40,60,0.12)", aspectRatio: "21/9" }}>
             <Image src="/award-elearning.jpg" alt="eLearning Award 2019 — next.classroom, edu:cube GmbH" fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,31,46,0.85) 0%, rgba(15,31,46,0.3) 60%, transparent 100%)" }} />
             <div style={{ position: "absolute", inset: 0, padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
