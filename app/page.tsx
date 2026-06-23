@@ -15,8 +15,8 @@ const milestones = [
   },
   {
     year: "2016",
-    title: "next.classroom",
-    body: "Erfindung des next.classroom: eine digitale Lernumgebung, die den analogen Raum aktiv in den Lernprozess einbezieht. Lernen in Bewegung, mobil, selbstgesteuert im eigenen Tempo.",
+    title: "next:classroom",
+    body: "Erfindung des next:classroom — eine digitale Lernumgebung, die den analogen Raum aktiv in den Lernprozess einbezieht. Lernen in Bewegung, mobil, selbstgesteuert im eigenen Tempo.",
   },
   {
     year: "2019–20",
@@ -72,7 +72,7 @@ const refs = [
     name: "Berufsschule BS15 Hamburg",
     body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe — mit Erfolg: 2019 als „Beste Berufliche Schule im digitalen Wandel Hamburgs“ ausgezeichnet.",
     tag: "Gesundheit",
-    photo: null,
+    photo: "/bs15-lernraum.png",
   },
 ];
 
@@ -354,7 +354,7 @@ export default function Home() {
               </p>
             </div>
             <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/3" }}>
-              <Image src="/stage.jpg" alt="Steffen Schuster beim AI Training Institute" fill style={{ objectFit: "cover" }} />
+              <Image src="/stage.png" alt="Steffen Schuster beim AI Training Institute" fill style={{ objectFit: "cover" }} />
             </div>
           </div>
 
