@@ -5,6 +5,8 @@ import { NetworkField } from "@/components/NetworkField";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { HeroParticles } from "@/components/HeroParticles";
 import { ScrollAnimations } from "@/components/ScrollAnimations";
+import { TiltCard } from "@/components/TiltCard";
+import { CustomCursor } from "@/components/CustomCursor";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -88,6 +90,7 @@ export default function Home() {
         overflowX: "hidden",
       }}
     >
+      <CustomCursor />
       <ScrollRevealInit />
       <ScrollAnimations />
       <Nav />
@@ -328,10 +331,20 @@ export default function Home() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {offers.map((offer) => (
-              <div key={offer.no} data-reveal className="offer-card" style={{ position: "relative", padding: "38px 34px", borderRadius: 18, background: "#fff", border: "1px solid #e4e9ee", boxShadow: "0 2px 14px rgba(20,40,60,0.04)" }}>
-                <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 13, color: ACCENT, marginBottom: 24 }}>{offer.no}</div>
-                <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 28, color: "#16212e", margin: "0 0 12px" }}>{offer.title}</h3>
-                <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#56636f", margin: 0 }}>{offer.body}</p>
+              <div key={offer.no} data-reveal>
+                <TiltCard
+                  className="offer-card"
+                  style={{
+                    padding: "38px 34px",
+                    borderRadius: 18,
+                    background: "#fff",
+                    border: "1px solid #e4e9ee",
+                  }}
+                >
+                  <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 13, color: ACCENT, marginBottom: 24 }}>{offer.no}</div>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 28, color: "#16212e", margin: "0 0 12px" }}>{offer.title}</h3>
+                  <p style={{ fontSize: 15.5, lineHeight: 1.6, color: "#56636f", margin: 0 }}>{offer.body}</p>
+                </TiltCard>
               </div>
             ))}
           </div>
