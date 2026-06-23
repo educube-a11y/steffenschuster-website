@@ -10,8 +10,7 @@ function CharSpan({ ch }: { ch: string }) {
   return (
     <span
       className="hero-char"
-      // Start invisible — GSAP reveals with scatter animation
-      style={{ display: "inline-block", whiteSpace: "pre", opacity: 0 }}
+      style={{ display: "inline-block", whiteSpace: "pre" }}
     >
       {ch}
     </span>
