@@ -70,7 +70,7 @@ const refs = [
   },
   {
     name: "Berufsschule BS15 Hamburg",
-    body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe — mit Erfolg: 2019 als „Beste Berufliche Schule im digitalen Wandel Hamburgs" ausgezeichnet.",
+    body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe — mit Erfolg: 2019 als „Beste Berufliche Schule im digitalen Wandel Hamburgs“ ausgezeichnet.",
     tag: "Gesundheit",
     photo: null,
   },
