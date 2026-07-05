@@ -77,7 +77,7 @@ const refs = [
   },
   {
     name: "Berufsschule BS15 Hamburg",
-    body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe — mit Erfolg: 2019 als „Beste Berufliche Schule im digitalen Wandel Hamburgs“ ausgezeichnet.",
+    body: "Verbindung analoger und digitaler Lernräume für medizinische Fachberufe — mit Erfolg: 2019 als „Beste Berufliche Schule im digitalen Wandel Hamburgs" ausgezeichnet.",
     tag: "Gesundheit",
     photo: "/bs15-lernraum.png",
   },
@@ -359,9 +359,10 @@ export default function Home() {
               <p data-reveal style={{ fontSize: 18, lineHeight: 1.7, color: "#45525f", margin: "0 0 36px" }}>
                 30 Jahre Engagement für Innovation in der Bildung wurden vielfach gewürdigt — von der delina über den eLearning Award bis zur Comenius EduMedia Medaille. Auf dem Innovation Summit hundrED in Zürich wurde das Lernkonzept BZLT unter den 100 innovativsten Bildungsideen weltweit geführt.
               </p>
+              {/* ── CHANGE #8: data-reveal added to each award row ── */}
               <div data-reveal style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {awards.map((a) => (
-                  <div key={a.label} className="award-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderRadius: 12, background: "#fff", border: "1px solid #e4e9ee" }}>
+                  <div key={a.label} data-reveal className="award-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 20px", borderRadius: 12, background: "#fff", border: "1px solid #e4e9ee" }}>
                     <span style={{ fontSize: 15, fontWeight: 500, color: "#16212e" }}>{a.label}</span>
                     <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT }}>{a.year}</span>
                   </div>
@@ -486,7 +487,7 @@ export default function Home() {
             Ein Gespräch ist der beste Anfang. Über KI, über Lernen, über das, was dazwischen entsteht.
           </p>
           <div data-reveal style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-            <a href="mailto:info@steffenschuster.de" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "17px 34px", borderRadius: 100, background: ACCENT, color: "#16212e", textDecoration: "none", fontSize: 16.5, fontWeight: 600, boxShadow: "0 10px 34px rgba(255,152,0,0.35)" }}>
+            <a href="/kontakt" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "17px 34px", borderRadius: 100, background: ACCENT, color: "#16212e", textDecoration: "none", fontSize: 16.5, fontWeight: 600, boxShadow: "0 10px 34px rgba(255,152,0,0.35)" }}>
               Gespräch starten <span>→</span>
             </a>
             <a href="https://www.linkedin.com/in/steffen-schuster-7297088b/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", padding: "17px 34px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.28)", color: "#fff", textDecoration: "none", fontSize: 16.5, fontWeight: 500 }}>
@@ -495,10 +496,81 @@ export default function Home() {
           </div>
           <div data-reveal style={{ marginTop: 70, paddingTop: 30, borderTop: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
             <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 19, color: "rgba(255,255,255,0.85)" }}>Steffen Schuster</span>
-            <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: "rgba(255,255,255,0.45)", letterSpacing: "1px" }}>info@steffenschuster.de</span>
+            <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: "rgba(255,255,255,0.45)", letterSpacing: "1px" }}>steffen@educube.de</span>
           </div>
         </div>
       </section>
+
+      {/* ── FOOTER / NAP ── */}
+      <footer
+        style={{
+          background: "#080f17",
+          padding: "40px 40px",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1180,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 20,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: 18,
+                color: "rgba(255,255,255,0.85)",
+                fontWeight: 500,
+              }}
+            >
+              Steffen Schuster
+            </span>
+            <address
+              style={{
+                fontStyle: "normal",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.4)",
+                lineHeight: 1.6,
+              }}
+            >
+              educube GmbH · Steffen Schuster · Stiller Weg 15 · 22607 Hamburg ·{" "}
+              <a
+                href="mailto:steffen@educube.de"
+                style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+              >
+                steffen@educube.de
+              </a>
+            </address>
+          </div>
+          <nav style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+            {[
+              { label: "Startseite", href: "/" },
+              { label: "Über mich", href: "/ueber" },
+              { label: "nora-ki.de", href: "https://nora-ki.de" },
+              { label: "educube.de", href: "https://www.educube.de/" },
+              { label: "Kontakt", href: "/kontakt" },
+            ].map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                style={{
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.4)",
+                  textDecoration: "none",
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }

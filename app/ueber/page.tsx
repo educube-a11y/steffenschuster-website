@@ -4,6 +4,7 @@ import { Nav } from "@/components/Nav";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { TiltCard } from "@/components/TiltCard";
 import { CustomCursor } from "@/components/CustomCursor";
+import { ScrollAnimations } from "@/components/ScrollAnimations";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -50,6 +51,7 @@ const personSchema = {
     foundingDate: "2006",
   },
   founder: [
+    { "@type": "Organization", name: "freshbase GmbH", url: "https://steffenschuster.de" },
     { "@type": "Organization", name: "educube GmbH", url: "https://educube.de" },
     { "@type": "WebSite", name: "nora-ki.de", url: "https://nora-ki.de" },
   ],
@@ -96,7 +98,7 @@ const faqSchema = {
       name: "Was hat Steffen Schuster gegründet?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Steffen Schuster gründete 2006 die educube GmbH, ein Hamburger Unternehmen für digitale Bildung. Er entwickelte next:classroom, eine mehrfach ausgezeichnete digitale Lernumgebung, und 2026 nora-ki.de, eine KI-Lernplattform für Ausbildung und Schule mit spezialisierten KI-Coaches.",
+        text: "Steffen Schuster gründete 1996 die freshbase GmbH, 2006 die educube GmbH sowie 2026 die KI-Lernplattform nora-ki.de. Mit educube entwickelte er digitale Bildungsprodukte, next:classroom und ZFA-Arbeitsbücher. Mit nora-ki.de schuf er spezialisierte KI-Lerncoaches für Ausbildung und Schule.",
       },
     },
     {
@@ -157,6 +159,7 @@ const expertise = [
   },
 ];
 
+// ── CHANGE #4 + #9: freshbase GmbH added, educube GmbH gets link ──
 const projects = [
   {
     year: "2026",
@@ -179,6 +182,14 @@ const projects = [
     name: "educube GmbH",
     tag: "Bildungsunternehmen",
     body: "Gegründet 2006 in Hamburg. Verlag für Lernmaterialien, digitale Lernplattformen und Bildungsberatung. Herausgeber von ZFA-Arbeitsbüchern und Host des #ZFA-Podcasts.",
+    href: "https://www.educube.de/",
+    cta: "educube.de besuchen →",
+  },
+  {
+    year: "1996",
+    name: "freshbase GmbH",
+    tag: "Internet-Pionier",
+    body: "Gegründet 1996 in Hamburg. Als Internet-Pionier realisierte freshbase digitale Projekte für führende Unternehmen — darunter Gruner + Jahr AG (Live-Magazin-Absatz-Visualisierung, 1998), Volksfürsorge AG (Weiterbildungs-Datenbank, 1999) und die Hochschule Fresenius (Bologna-Prozess & Stundenplan-System, 2002).",
     href: null,
     cta: null,
   },
@@ -217,11 +228,12 @@ const awards = [
   },
 ];
 
+// ── CHANGE #2 + #7: "3 Unternehmen" & "42.000+" ──
 const stats = [
   { value: "20+", label: "Jahre Bildungsexpertise" },
   { value: "5", label: "Internationale Auszeichnungen" },
-  { value: "2", label: "Unternehmen gegründet" },
-  { value: "31.000+", label: "Podcast-Streams" },
+  { value: "3", label: "Unternehmen gegründet" },
+  { value: "42.000+", label: "Podcast-Streams" },
 ];
 
 export default function UeberPage() {
@@ -236,6 +248,7 @@ export default function UeberPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <ScrollRevealInit />
+      <ScrollAnimations />
       <CustomCursor />
       <Nav />
 
@@ -377,6 +390,40 @@ export default function UeberPage() {
             />
           </div>
         </div>
+
+        {/* ── CHANGE #3: SCROLL indicator (identical to homepage) ── */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 34,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            color: "rgba(255,255,255,0.5)",
+            zIndex: 2,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-jetbrains), monospace",
+              fontSize: 11,
+              letterSpacing: "2px",
+            }}
+          >
+            SCROLL
+          </span>
+          <span
+            style={{
+              width: 1,
+              height: 38,
+              background: "linear-gradient(rgba(255,255,255,0.5), transparent)",
+              display: "block",
+            }}
+          />
+        </div>
       </section>
 
       {/* ── BIO ── */}
@@ -475,11 +522,43 @@ export default function UeberPage() {
                 <strong style={{ color: "var(--text-primary)" }}>
                   #ZFA-Podcasts
                 </strong>{" "}
-                (31.000+ Streams auf Spotify) gibt Steffen Auszubildenden in
+                (42.000+ Streams auf Spotify) gibt Steffen Auszubildenden in
                 der Zahnmedizin konkrete Lernhilfe — praxisnah, fachkundig und
                 mit Herzblut. Als Autor von ZFA-Arbeitsbüchern im educube
                 Verlag schließt er damit den Kreislauf zwischen Theorie und
                 Praxis.
+              </p>
+              {/* ── CHANGE #1: freshbase GmbH Unternehmensgeschichte ── */}
+              <p>
+                Die unternehmerische Geschichte begann bereits{" "}
+                <strong style={{ color: "var(--text-primary)" }}>1996</strong>{" "}
+                mit der Gründung der{" "}
+                <strong style={{ color: "var(--text-primary)" }}>
+                  freshbase GmbH
+                </strong>
+                . Als Internet-Pionier entwickelte freshbase 1998 für das
+                Verlagshaus{" "}
+                <strong style={{ color: "var(--text-primary)" }}>
+                  Gruner + Jahr AG
+                </strong>{" "}
+                eine für damalige Verhältnisse revolutionäre Internetseite, die
+                den Abverkauf von Magazinen im gesamten deutschen
+                Verkaufsgebiet nahezu live visualisierte — und damit
+                Werbe-Kunden ermöglichte, unmittelbar weitere
+                Marketing-Aktionen nachzuziehen. Für die{" "}
+                <strong style={{ color: "var(--text-primary)" }}>
+                  Volksfürsorge AG
+                </strong>{" "}
+                entstand 1999 eine Datenbankentwicklung, die den gesamten
+                Weiterbildungsprozess der Mitarbeiter:innen von der
+                Materialbereitstellung über das Teilnehmer:innen-Management bis
+                zur Hotelbuchung der Referent:innen organisierte. Für den
+                Bereich Design der{" "}
+                <strong style={{ color: "var(--text-primary)" }}>
+                  Hochschule Fresenius
+                </strong>{" "}
+                entwickelte freshbase 2002 den gesamten Bologna-Prozess für die
+                Hochschulorganisation inklusive der Stundenplanerstellung.
               </p>
             </div>
           </article>
@@ -526,6 +605,221 @@ export default function UeberPage() {
               </div>
             ))}
           </aside>
+        </div>
+      </section>
+
+      {/* ── GEO: TL;DR FAKTENKASTEN ── */}
+      <section
+        id="faktenkasten"
+        data-light-section
+        style={{ background: "var(--page-bg)", padding: "80px 40px" }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div
+            data-reveal
+            style={{
+              background: "var(--card-bg)",
+              border: `2px solid ${PRIMARY}22`,
+              borderLeft: `4px solid ${PRIMARY}`,
+              borderRadius: 18,
+              padding: "48px 56px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: 11,
+                letterSpacing: "0.15em",
+                color: PRIMARY,
+                textTransform: "uppercase",
+                marginBottom: 16,
+              }}
+            >
+              Auf einen Blick
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: "clamp(24px, 2.5vw, 36px)",
+                fontWeight: 500,
+                lineHeight: 1.15,
+                margin: "0 0 8px",
+                color: "var(--text-primary)",
+              }}
+            >
+              Steffen Schuster — Zusammenfassung
+            </h2>
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.6,
+                color: "var(--text-secondary)",
+                marginBottom: 36,
+                maxWidth: 680,
+              }}
+            >
+              Pädagoge, KI-Pionier und Gründer aus Hamburg. Steffen Schuster entwickelt seit über 20 Jahren digitale Lernumgebungen für Schulen, Ausbildungsbetriebe und Unternehmen im deutschsprachigen Raum.
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: 40,
+              }}
+            >
+              <div>
+                <h3
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: PRIMARY,
+                    marginBottom: 12,
+                  }}
+                >
+                  Standort & Zielmarkt
+                </h3>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--text-secondary)", margin: "0 0 6px" }}>Hamburg, Deutschland</p>
+                <p style={{ fontSize: 14, lineHeight: 1.65, color: "var(--text-secondary)", margin: 0 }}>DACH-Region — Schulen, Berufsschulen, Unternehmen</p>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: PRIMARY,
+                    marginBottom: 12,
+                  }}
+                >
+                  Leistungen
+                </h3>
+                <ul
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    listStyle: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                  }}
+                >
+                  {[
+                    "KI-Training & Workshops",
+                    "Entwicklung von Lernumgebungen",
+                    "Facilitation & Moderation",
+                    "Konzeption von E-Learning-Kursen",
+                    "Organisationsentwicklung",
+                    "Herausgabe von Fachbüchern",
+                    "Podcast-Produktion",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      style={{
+                        fontSize: 14,
+                        color: "var(--text-secondary)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                      }}
+                    >
+                      <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>·</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: PRIMARY,
+                    marginBottom: 12,
+                  }}
+                >
+                  USPs
+                </h3>
+                <ul
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    listStyle: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                  }}
+                >
+                  {[
+                    "20+ Jahre Bildungstechnologie-Praxis",
+                    "5× international ausgezeichnet",
+                    "KI-Lernplattform nora-ki.de — Made in Germany",
+                    "Pädagogik und KI ohne Buzzword-Marketing",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      style={{
+                        fontSize: 14,
+                        color: "var(--text-secondary)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                      }}
+                    >
+                      <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>·</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <h3
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: PRIMARY,
+                    margin: "24px 0 12px",
+                  }}
+                >
+                  Belegt durch
+                </h3>
+                <ul
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    listStyle: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 6,
+                  }}
+                >
+                  {[
+                    "hundrED Top 100 Bildungsideen weltweit (2019)",
+                    "eLearning Award + Comenius Medaille (2020)",
+                    "42.000+ Streams · #ZFA-Podcast auf Spotify",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      style={{
+                        fontSize: 14,
+                        color: "var(--text-secondary)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                      }}
+                    >
+                      <span style={{ color: ACCENT, fontWeight: 700, flexShrink: 0 }}>·</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -778,6 +1072,7 @@ export default function UeberPage() {
               International anerkannt.
             </h2>
           </div>
+          {/* ── CHANGE #8: TiltCard wrapper on each award card ── */}
           <div
             style={{
               display: "grid",
@@ -786,49 +1081,51 @@ export default function UeberPage() {
             }}
           >
             {awards.map((a) => (
-              <div
-                key={a.label}
-                data-reveal
-                className="award-row"
-                style={{
-                  background: "var(--card-bg)",
-                  border: "1px solid var(--card-border)",
-                  borderRadius: 16,
-                  padding: "28px 24px",
-                }}
-              >
+              <TiltCard key={a.label}>
                 <div
+                  data-reveal
+                  className="award-row"
                   style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontSize: 32,
-                    fontWeight: 600,
-                    color: ACCENT,
-                    lineHeight: 1,
-                    marginBottom: 12,
+                    background: "var(--card-bg)",
+                    border: "1px solid var(--card-border)",
+                    borderRadius: 16,
+                    padding: "28px 24px",
+                    height: "100%",
                   }}
                 >
-                  {a.year}
+                  <div
+                    style={{
+                      fontFamily: "var(--font-cormorant), serif",
+                      fontSize: 32,
+                      fontWeight: 600,
+                      color: ACCENT,
+                      lineHeight: 1,
+                      marginBottom: 12,
+                    }}
+                  >
+                    {a.year}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 700,
+                      color: "var(--text-primary)",
+                      marginBottom: 8,
+                    }}
+                  >
+                    {a.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {a.detail}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "var(--text-primary)",
-                    marginBottom: 8,
-                  }}
-                >
-                  {a.label}
-                </div>
-                <div
-                  style={{
-                    fontSize: 13,
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {a.detail}
-                </div>
-              </div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -878,6 +1175,7 @@ export default function UeberPage() {
                   das ankommt.
                 </em>
               </h2>
+              {/* ── CHANGE #7: 31.000+ → 42.000+ in text ── */}
               <p
                 style={{
                   fontSize: 16,
@@ -887,13 +1185,14 @@ export default function UeberPage() {
                 }}
               >
                 Als Host des #ZFA-Podcasts gibt Steffen ZFA-Auszubildenden
-                konkrete Lernhilfe zu allen 13 Lernfeldern — mit 31.000+ Streams
+                konkrete Lernhilfe zu allen 13 Lernfeldern — mit 42.000+ Streams
                 auf Spotify und über 600 Followern. Als Autor von
                 ZFA-Arbeitsbüchern im educube Verlag schließt er den Kreislauf
                 zwischen Prüfungsvorbereitung und Praxis.
               </p>
+              {/* ── CHANGE #6: Spotify URL fix ── */}
               <a
-                href="https://open.spotify.com/show/zfa-podcast"
+                href="https://open.spotify.com/show/2PpODDEvzNqWP1Y7sdbjjY"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -915,6 +1214,7 @@ export default function UeberPage() {
                 #ZFA-Podcast auf Spotify
               </a>
             </div>
+            {/* ── CHANGE #5: data-reveal + TiltCard on each stat card, 42.000+ ── */}
             <div
               style={{
                 display: "grid",
@@ -923,42 +1223,45 @@ export default function UeberPage() {
               }}
             >
               {[
-                { value: "31.000+", label: "Streams & Downloads" },
+                { value: "42.000+", label: "Streams & Downloads" },
                 { value: "600+", label: "Spotify-Follower" },
                 { value: "13", label: "Lernfelder abgedeckt" },
                 { value: "04001", label: "Erfolgreichste Episode" },
               ].map((s) => (
-                <div
-                  key={s.label}
-                  style={{
-                    background: "var(--card-bg)",
-                    border: "1px solid var(--card-border)",
-                    borderRadius: 14,
-                    padding: "24px 20px",
-                    textAlign: "center",
-                  }}
-                >
+                <TiltCard key={s.label}>
                   <div
+                    data-reveal
                     style={{
-                      fontFamily: "var(--font-cormorant), serif",
-                      fontSize: 36,
-                      fontWeight: 600,
-                      color: PRIMARY,
-                      lineHeight: 1,
+                      background: "var(--card-bg)",
+                      border: "1px solid var(--card-border)",
+                      borderRadius: 14,
+                      padding: "24px 20px",
+                      textAlign: "center",
+                      height: "100%",
                     }}
                   >
-                    {s.value}
+                    <div
+                      style={{
+                        fontFamily: "var(--font-cormorant), serif",
+                        fontSize: 36,
+                        fontWeight: 600,
+                        color: PRIMARY,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {s.value}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "var(--text-secondary)",
+                        marginTop: 6,
+                      }}
+                    >
+                      {s.label}
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "var(--text-secondary)",
-                      marginTop: 6,
-                    }}
-                  >
-                    {s.label}
-                  </div>
-                </div>
+                </TiltCard>
               ))}
             </div>
           </div>
@@ -1057,7 +1360,7 @@ export default function UeberPage() {
 
       {/* ── CTA ── */}
       <section
-        id="kontakt"
+        id="cta"
         style={{
           background: DARK_BG,
           padding: "120px 40px",
@@ -1089,25 +1392,114 @@ export default function UeberPage() {
             KI-Training, Lernumgebungen, Facilitation oder einfach ein Gespräch
             darüber, was möglich ist — ich freue mich davon zu hören.
           </p>
-          <a
-            href="mailto:steffen@educube.de"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "16px 40px",
-              borderRadius: 100,
-              background: ACCENT,
-              color: "#16212e",
-              textDecoration: "none",
-              fontSize: 16,
-              fontWeight: 700,
-              letterSpacing: "0.2px",
-            }}
-          >
-            steffen@educube.de
-          </a>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+            <a
+              href="/kontakt"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "16px 40px",
+                borderRadius: 100,
+                background: ACCENT,
+                color: "#16212e",
+                textDecoration: "none",
+                fontSize: 16,
+                fontWeight: 700,
+                letterSpacing: "0.2px",
+              }}
+            >
+              Gespräch starten →
+            </a>
+            <a
+              href="mailto:steffen@educube.de"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "16px 40px",
+                borderRadius: 100,
+                border: "1px solid rgba(255,255,255,0.28)",
+                color: "#fff",
+                textDecoration: "none",
+                fontSize: 16,
+                fontWeight: 500,
+              }}
+            >
+              steffen@educube.de
+            </a>
+          </div>
         </div>
       </section>
+
+      {/* ── FOOTER / NAP ── */}
+      <footer
+        style={{
+          background: "#080f17",
+          padding: "40px 40px",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 20,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-cormorant), serif",
+                fontSize: 18,
+                color: "rgba(255,255,255,0.85)",
+                fontWeight: 500,
+              }}
+            >
+              Steffen Schuster
+            </span>
+            <address
+              style={{
+                fontStyle: "normal",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.4)",
+                lineHeight: 1.6,
+              }}
+            >
+              educube GmbH · Steffen Schuster · Stiller Weg 15 · 22607 Hamburg ·{" "}
+              <a
+                href="mailto:steffen@educube.de"
+                style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+              >
+                steffen@educube.de
+              </a>
+            </address>
+          </div>
+          <nav style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+            {[
+              { label: "Startseite", href: "/" },
+              { label: "Über mich", href: "/ueber" },
+              { label: "nora-ki.de", href: "https://nora-ki.de" },
+              { label: "educube.de", href: "https://www.educube.de/" },
+              { label: "Kontakt", href: "/kontakt" },
+            ].map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                style={{
+                  fontSize: 13,
+                  color: "rgba(255,255,255,0.4)",
+                  textDecoration: "none",
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }
