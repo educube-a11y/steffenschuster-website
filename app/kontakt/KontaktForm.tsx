@@ -30,11 +30,13 @@ export function KontaktForm() {
     setLoading(true);
     setError(false);
     const formData = new FormData(e.currentTarget);
+    const params = new URLSearchParams();
+    formData.forEach((value, key) => params.append(key, value.toString()));
     try {
       const resp = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+        body: params.toString(),
       });
       if (resp.ok) {
         router.push("/kontakt/danke");
@@ -58,24 +60,11 @@ export function KontaktForm() {
 
       {/* Name */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <label
-          htmlFor="name"
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--text-secondary)",
-          }}
-        >
+        <label htmlFor="name" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
           Name <span style={{ color: ACCENT }}>*</span>
         </label>
         <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          placeholder="Vorname Nachname"
+          id="name" name="name" type="text" required placeholder="Vorname Nachname"
           style={inputStyle}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
@@ -84,24 +73,11 @@ export function KontaktForm() {
 
       {/* E-Mail */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <label
-          htmlFor="email"
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--text-secondary)",
-          }}
-        >
+        <label htmlFor="email" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
           E-Mail <span style={{ color: ACCENT }}>*</span>
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          placeholder="deine@email.de"
+          id="email" name="email" type="email" required placeholder="deine@email.de"
           style={inputStyle}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
@@ -110,24 +86,11 @@ export function KontaktForm() {
 
       {/* Nachricht */}
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        <label
-          htmlFor="nachricht"
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "var(--text-secondary)",
-          }}
-        >
+        <label htmlFor="nachricht" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-secondary)" }}>
           Nachricht <span style={{ color: ACCENT }}>*</span>
         </label>
         <textarea
-          id="nachricht"
-          name="nachricht"
-          required
-          rows={6}
-          placeholder="Was beschäftigt dich? Worum geht es?"
+          id="nachricht" name="nachricht" required rows={6} placeholder="Was beschäftigt dich? Worum geht es?"
           style={{ ...inputStyle, resize: "vertical" }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
@@ -150,20 +113,12 @@ export function KontaktForm() {
           type="submit"
           disabled={loading}
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 10,
-            padding: "16px 40px",
-            borderRadius: 100,
+            display: "inline-flex", alignItems: "center", gap: 10,
+            padding: "16px 40px", borderRadius: 100,
             background: loading ? "rgba(255,152,0,0.6)" : ACCENT,
-            color: "#16212e",
-            fontSize: 16,
-            fontWeight: 700,
-            border: "none",
+            color: "#16212e", fontSize: 16, fontWeight: 700, border: "none",
             cursor: loading ? "not-allowed" : "pointer",
-            letterSpacing: "0.2px",
-            fontFamily: "inherit",
-            transition: "background 0.2s",
+            letterSpacing: "0.2px", fontFamily: "inherit", transition: "background 0.2s",
           }}
         >
           {loading ? "Wird gesendet…" : "Nachricht senden →"}

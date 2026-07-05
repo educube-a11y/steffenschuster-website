@@ -89,6 +89,7 @@ export default function KontaktPage() {
 
       {/* ── FORMULAR ── */}
       <section
+        id="formular"
         data-light-section
         style={{
           background: "var(--section-alt-bg)",
@@ -127,15 +128,17 @@ export default function KontaktPage() {
                 href="mailto:steffen@educube.de"
                 style={{
                   fontSize: 16,
-                  color: PRIMARY,
-                  textDecoration: "none",
-                  fontWeight: 500,
+                  color: ACCENT,
+                  textDecoration: "underline",
+                  textDecorationColor: "rgba(255,152,0,0.4)",
+                  textUnderlineOffset: 3,
+                  fontWeight: 600,
                   display: "flex",
                   alignItems: "center",
                   gap: 8,
                 }}
               >
-                <span style={{ opacity: 0.5 }}>✉</span> steffen@educube.de
+                ✉ steffen@educube.de
               </a>
               <address style={{ fontStyle: "normal", fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.7 }}>
                 educube GmbH<br />
