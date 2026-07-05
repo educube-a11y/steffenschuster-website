@@ -85,7 +85,7 @@ export function Nav() {
         </a>
         <ThemeToggle />
         <a
-          href={`${base}#kontakt`}
+          href="/kontakt#formular"
           style={{
             display: "inline-flex",
             alignItems: "center",
