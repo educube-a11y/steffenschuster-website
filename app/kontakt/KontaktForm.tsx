@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 
-const inputStyle = {
+const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "14px 18px",
   borderRadius: 10,
@@ -13,17 +16,42 @@ const inputStyle = {
   fontSize: 16,
   outline: "none",
   fontFamily: "inherit",
-  boxSizing: "border-box" as const,
+  boxSizing: "border-box",
   transition: "border-color 0.2s",
 };
 
 export function KontaktForm() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(false);
+    const formData = new FormData(e.currentTarget);
+    try {
+      const resp = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+      });
+      if (resp.ok) {
+        router.push("/kontakt/danke");
+      } else {
+        setError(true);
+        setLoading(false);
+      }
+    } catch {
+      setError(true);
+      setLoading(false);
+    }
+  };
+
   return (
     <form
       name="kontakt"
-      method="POST"
-      data-netlify="true"
-      action="/kontakt/danke"
+      onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: 24 }}
     >
       <input type="hidden" name="form-name" value="kontakt" />
@@ -100,46 +128,45 @@ export function KontaktForm() {
           required
           rows={6}
           placeholder="Was beschäftigt dich? Worum geht es?"
-          style={{
-            ...inputStyle,
-            resize: "vertical",
-          }}
+          style={{ ...inputStyle, resize: "vertical" }}
           onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
           onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
         />
       </div>
 
-      <p
-        style={{
-          fontSize: 13,
-          color: "var(--text-secondary)",
-          lineHeight: 1.6,
-          margin: 0,
-        }}
-      >
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.6, margin: 0 }}>
         Mit dem Absenden stimmst du zu, dass deine Daten zur Bearbeitung deiner Anfrage genutzt werden.
       </p>
+
+      {error && (
+        <p style={{ fontSize: 14, color: "#e53e3e", margin: 0 }}>
+          Beim Senden ist ein Fehler aufgetreten. Bitte versuche es nochmal oder schreibe direkt an{" "}
+          <a href="mailto:steffen@educube.de" style={{ color: "#e53e3e" }}>steffen@educube.de</a>.
+        </p>
+      )}
 
       <div>
         <button
           type="submit"
+          disabled={loading}
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: 10,
             padding: "16px 40px",
             borderRadius: 100,
-            background: ACCENT,
+            background: loading ? "rgba(255,152,0,0.6)" : ACCENT,
             color: "#16212e",
             fontSize: 16,
             fontWeight: 700,
             border: "none",
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
             letterSpacing: "0.2px",
             fontFamily: "inherit",
+            transition: "background 0.2s",
           }}
         >
-          Nachricht senden →
+          {loading ? "Wird gesendet…" : "Nachricht senden →"}
         </button>
       </div>
     </form>
