@@ -3,6 +3,7 @@ import { Nav } from "@/components/Nav";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { CustomCursor } from "@/components/CustomCursor";
+import { KontaktForm } from "./KontaktForm";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -102,169 +103,9 @@ export default function KontaktPage() {
             gap: 60,
           }}
         >
-          {/* Netlify-Form */}
+          {/* Netlify-Form (Client Component) */}
           <div data-reveal>
-            <form
-              name="kontakt"
-              method="POST"
-              data-netlify="true"
-              action="/kontakt/danke"
-              style={{ display: "flex", flexDirection: "column", gap: 24 }}
-            >
-              {/* Required hidden input for Netlify Forms */}
-              <input type="hidden" name="form-name" value="kontakt" />
-
-              {/* Name */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <label
-                  htmlFor="name"
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  Name <span style={{ color: ACCENT }}>*</span>
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Vorname Nachname"
-                  style={{
-                    width: "100%",
-                    padding: "14px 18px",
-                    borderRadius: 10,
-                    border: "1.5px solid var(--card-border)",
-                    background: "var(--card-bg)",
-                    color: "var(--text-primary)",
-                    fontSize: 16,
-                    outline: "none",
-                    fontFamily: "inherit",
-                    boxSizing: "border-box",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
-                  onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
-                />
-              </div>
-
-              {/* E-Mail */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <label
-                  htmlFor="email"
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  E-Mail <span style={{ color: ACCENT }}>*</span>
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="deine@email.de"
-                  style={{
-                    width: "100%",
-                    padding: "14px 18px",
-                    borderRadius: 10,
-                    border: "1.5px solid var(--card-border)",
-                    background: "var(--card-bg)",
-                    color: "var(--text-primary)",
-                    fontSize: 16,
-                    outline: "none",
-                    fontFamily: "inherit",
-                    boxSizing: "border-box",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
-                  onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
-                />
-              </div>
-
-              {/* Nachricht */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                <label
-                  htmlFor="nachricht"
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                    color: "var(--text-secondary)",
-                  }}
-                >
-                  Nachricht <span style={{ color: ACCENT }}>*</span>
-                </label>
-                <textarea
-                  id="nachricht"
-                  name="nachricht"
-                  required
-                  rows={6}
-                  placeholder="Was beschäftigt dich? Worum geht es?"
-                  style={{
-                    width: "100%",
-                    padding: "14px 18px",
-                    borderRadius: 10,
-                    border: "1.5px solid var(--card-border)",
-                    background: "var(--card-bg)",
-                    color: "var(--text-primary)",
-                    fontSize: 16,
-                    outline: "none",
-                    fontFamily: "inherit",
-                    resize: "vertical",
-                    boxSizing: "border-box",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = PRIMARY)}
-                  onBlur={(e) => (e.target.style.borderColor = "var(--card-border)")}
-                />
-              </div>
-
-              {/* Datenschutz-Hinweis */}
-              <p
-                style={{
-                  fontSize: 13,
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                Mit dem Absenden stimmst du zu, dass deine Daten zur Bearbeitung deiner Anfrage genutzt werden.
-              </p>
-
-              {/* Submit */}
-              <div>
-                <button
-                  type="submit"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 10,
-                    padding: "16px 40px",
-                    borderRadius: 100,
-                    background: ACCENT,
-                    color: "#16212e",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    border: "none",
-                    cursor: "pointer",
-                    letterSpacing: "0.2px",
-                    fontFamily: "inherit",
-                  }}
-                >
-                  Nachricht senden →
-                </button>
-              </div>
-            </form>
+            <KontaktForm />
           </div>
 
           {/* Direktkontakt */}
