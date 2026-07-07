@@ -93,7 +93,7 @@ Wenn im Nutzer-Input Zitate oder Aussagen von Teilnehmenden vorkommen, integrier
 
 Kurze, organische Überleitung. Kein Werbetext. Beispiel:
 
-> Wenn du KI direkt in deinen Unterricht bringen möchtest, schau dir [nora](https://nora-ki.de) an — das Tool, das ich für genau solche Situationen gebaut habe.
+> Wenn du KI direkt in deinen Unterricht bringen möchtest, schau dir <a href="https://nora-ki.de" target="_blank" rel="noopener noreferrer">nora</a> an — das Tool, das ich für genau solche Situationen gebaut habe.
 
 ---
 
@@ -104,7 +104,7 @@ Kurze, organische Überleitung. Kein Werbetext. Beispiel:
 - **H1 nie im Body** — Titel kommt aus dem Frontmatter, wird automatisch gerendert.
 - **Zitate nur verwenden**, wenn sie im Nutzer-Input stehen oder klar aus dem Kontext ableitbar sind (dann als „sinngemäß" kennzeichnen).
 - **Länge:** ~800–1.200 Wörter Body. Qualität vor Quantität.
-- **Links:** Externe Links immer mit vollständiger URL. nora-ki.de immer verlinken.
+- **Links:** Alle externen Links als HTML-Anchor schreiben, damit sie im neuen Tab öffnen: `<a href="https://..." target="_blank" rel="noopener noreferrer">Linktext</a>`. Kein Markdown-Link-Format `[text](url)` für externe URLs verwenden. Interne Seiten (z. B. `/kontakt`) dürfen als Markdown-Link bleiben.
 
 ---
 

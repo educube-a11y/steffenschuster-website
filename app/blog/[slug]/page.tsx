@@ -125,12 +125,17 @@ const mdxComponents = {
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong style={{ color: "var(--text-primary)", fontWeight: 600 }} {...props} />
   ),
-  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a
-      style={{ color: PRIMARY, textDecoration: "underline", textUnderlineOffset: 3 }}
-      {...props}
-    />
-  ),
+  a: ({ href, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+    const isExternal = href?.startsWith("http");
+    return (
+      <a
+        href={href}
+        style={{ color: PRIMARY, textDecoration: "underline", textUnderlineOffset: 3 }}
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...props}
+      />
+    );
+  },
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
       style={{
