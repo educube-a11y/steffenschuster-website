@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { LogoMark } from "@/components/LogoMark";
 import { NetworkField } from "@/components/NetworkField";
@@ -10,6 +11,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { CursorTrail } from "@/components/CursorTrail";
 import { HeroHeadline } from "@/components/HeroHeadline";
 import { NeuralCanvas } from "@/components/NeuralCanvas";
+import { getAllPosts, formatDate } from "@/lib/blog";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -469,6 +471,152 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── BLOG VORSCHAU ── */}
+      {(() => {
+        const posts = getAllPosts().slice(0, 3);
+        if (posts.length === 0) return null;
+        return (
+          <section
+            data-light-section
+            style={{ background: "var(--section-alt-bg)", padding: "100px 40px 110px" }}
+          >
+            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+              <div
+                data-reveal
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: 20,
+                  marginBottom: 56,
+                }}
+              >
+                <div>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-jetbrains), monospace",
+                      fontSize: 11,
+                      letterSpacing: "0.18em",
+                      color: ACCENT,
+                      textTransform: "uppercase",
+                      marginBottom: 14,
+                    }}
+                  >
+                    Aus dem Blog
+                  </p>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-cormorant), serif",
+                      fontWeight: 500,
+                      fontSize: "clamp(32px, 4vw, 52px)",
+                      lineHeight: 1.05,
+                      color: "var(--text-primary)",
+                      margin: 0,
+                    }}
+                  >
+                    Gedanken aus der Praxis
+                  </h2>
+                </div>
+                <Link
+                  href="/blog"
+                  style={{
+                    fontSize: 15,
+                    color: PRIMARY,
+                    textDecoration: "none",
+                    fontWeight: 500,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Alle Artikel →
+                </Link>
+              </div>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                  gap: 24,
+                }}
+              >
+                {posts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <article
+                      data-reveal
+                      style={{
+                        padding: "32px 28px",
+                        borderRadius: 16,
+                        border: "1px solid var(--card-border)",
+                        background: "var(--card-bg)",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 16,
+                        transition: "border-color 0.2s, transform 0.2s",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: "var(--font-jetbrains), monospace",
+                          fontSize: 11,
+                          letterSpacing: "0.12em",
+                          color: "var(--text-secondary)",
+                          textTransform: "uppercase",
+                          margin: 0,
+                        }}
+                      >
+                        {formatDate(post.date)}
+                      </p>
+                      <h3
+                        style={{
+                          fontFamily: "var(--font-cormorant), serif",
+                          fontSize: "clamp(20px, 2vw, 24px)",
+                          fontWeight: 500,
+                          color: "var(--text-primary)",
+                          lineHeight: 1.25,
+                          margin: 0,
+                          flex: 1,
+                        }}
+                      >
+                        {post.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: 14,
+                          lineHeight: 1.65,
+                          color: "var(--text-secondary)",
+                          margin: 0,
+                          display: "-webkit-box",
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {post.description}
+                      </p>
+                      <span
+                        style={{
+                          fontSize: 14,
+                          color: ACCENT,
+                          fontWeight: 500,
+                          marginTop: "auto",
+                        }}
+                      >
+                        Weiterlesen →
+                      </span>
+                    </article>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ── KONTAKT ── */}
       <section id="kontakt" style={{ position: "relative", padding: "150px 40px", background: "radial-gradient(120% 100% at 50% 0%, #3a6892 0%, #2b5274 50%, #1b3953 100%)", overflow: "hidden", textAlign: "center" }}>

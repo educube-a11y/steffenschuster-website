@@ -8,6 +8,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { getAllPosts, getPostBySlug, formatDate } from "@/lib/blog";
+import "../blog.css";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -202,6 +203,19 @@ export default async function BlogPostPage({
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}/blog/${slug}` },
   };
 
+  const faqJsonLd =
+    post.faq && post.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }
+      : null;
+
   return (
     <div
       style={{
@@ -214,6 +228,12 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <ScrollRevealInit />
       <ScrollAnimations />
       <CustomCursor />
@@ -404,6 +424,52 @@ export default async function BlogPostPage({
           </div>
         </div>
       </section>
+
+      {/* ── FAQ ── */}
+      {post.faq && post.faq.length > 0 && (
+        <section
+          data-light-section
+          style={{
+            background: "var(--page-bg)",
+            padding: "80px 40px 100px",
+            borderTop: "1px solid var(--card-border)",
+          }}
+        >
+          <div style={{ maxWidth: 760, margin: "0 auto" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-jetbrains), monospace",
+                fontSize: 11,
+                letterSpacing: "0.18em",
+                color: ACCENT,
+                textTransform: "uppercase",
+                marginBottom: 32,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 28,
+                  height: 1.5,
+                  background: ACCENT,
+                }}
+              />
+              Häufige Fragen
+            </p>
+            <div>
+              {post.faq.map((item, i) => (
+                <details key={i} className="faq-item" open={i === 0}>
+                  <summary>{item.question}</summary>
+                  <div className="faq-answer">{item.answer}</div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

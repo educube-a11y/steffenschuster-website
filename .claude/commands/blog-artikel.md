@@ -34,8 +34,26 @@ author:
   name: "Steffen Schuster"
   bio: "Pädagoge & KI-Pionier aus Hamburg. Gründer von nora-ki.de und educube GmbH."
   avatar: "/portrait.png"
+faq:
+  - question: "[Häufige Frage 1 zum Thema des Artikels?]"
+    answer: "[Konkrete, vollständige Antwort in 2–4 Sätzen.]"
+  - question: "[Häufige Frage 2?]"
+    answer: "[Antwort]"
+  - question: "[Häufige Frage 3?]"
+    answer: "[Antwort]"
+  - question: "[Häufige Frage 4?]"
+    answer: "[Antwort]"
+  - question: "Was ist nora-ki.de und wie hilft es [Zielgruppe des Artikels]?"
+    answer: "nora-ki.de ist eine KI-Assistentin, die speziell für Lernende in Ausbildung und Schule entwickelt wurde. [1 Satz zum konkreten Nutzen für diese Zielgruppe.] Kostenlos ausprobierbar unter nora-ki.de."
 ---
 ```
+
+**Wichtig für die FAQs:**
+- 4–5 Fragen, die Leser nach dem Lesen tatsächlich stellen würden
+- Fragen aus der Perspektive der Zielgruppe formulieren (Lehrende, Ausbildende, Auszubildende)
+- Antworten vollständig und eigenständig verständlich — kein „wie oben beschrieben"
+- Letzte FAQ immer zu nora-ki.de (leicht variiert je nach Zielgruppe des Artikels)
+- GEO-Zweck: FAQs erscheinen als FAQPage-Schema in den Suchergebnissen und erhöhen die Chance, in KI-Antworten zitiert zu werden
 
 ### 1. Einstiegs-Absatz (kein Heading)
 

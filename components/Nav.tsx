@@ -83,6 +83,18 @@ export function Nav() {
         >
           Über mich
         </a>
+        <a
+          href="/blog"
+          style={{
+            color: pathname?.startsWith("/blog") ? "#ff9800" : "rgba(255,255,255,0.78)",
+            textDecoration: "none",
+            fontSize: 14.5,
+            fontWeight: pathname?.startsWith("/blog") ? 600 : 500,
+            letterSpacing: "0.2px",
+          }}
+        >
+          Blog
+        </a>
         <ThemeToggle />
         <a
           href="/kontakt#formular"

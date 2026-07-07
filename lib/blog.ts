@@ -10,12 +10,18 @@ export interface PostAuthor {
   avatar?: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface PostMeta {
   slug: string;
   title: string;
   date: string;
   description: string;
   author: PostAuthor;
+  faq?: FaqItem[];
 }
 
 export interface Post extends PostMeta {
@@ -38,6 +44,7 @@ export function getAllPosts(): PostMeta[] {
       date: data.date ?? "",
       description: data.description ?? "",
       author: data.author ?? { name: "Steffen Schuster", bio: "" },
+      faq: data.faq ?? [],
     } as PostMeta;
   });
 
@@ -59,6 +66,7 @@ export function getPostBySlug(slug: string): Post | null {
     date: data.date ?? "",
     description: data.description ?? "",
     author: data.author ?? { name: "Steffen Schuster", bio: "" },
+    faq: data.faq ?? [],
     content,
   };
 }
