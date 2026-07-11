@@ -44,6 +44,7 @@ export default function BlogPage() {
 
       {/* ── HERO ── */}
       <section
+        className="blog-hero"
         style={{
           background: DARK_BG,
           padding: "160px 40px 100px",

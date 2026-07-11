@@ -277,6 +277,7 @@ export default function UeberPage() {
           }}
         />
         <div
+          className="ueber-hero-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -363,6 +364,7 @@ export default function UeberPage() {
 
           {/* Portrait */}
           <div
+            className="ueber-hero-portrait"
             style={{
               position: "relative",
               borderRadius: 24,
@@ -436,6 +438,7 @@ export default function UeberPage() {
         }}
       >
         <div
+          className="bio-grid"
           style={{
             maxWidth: 1200,
             margin: "0 auto",
@@ -564,7 +567,7 @@ export default function UeberPage() {
           </article>
 
           {/* Sidebar facts */}
-          <aside data-reveal style={{ paddingTop: 60 }}>
+          <aside data-reveal className="bio-sidebar" style={{ paddingTop: 60 }}>
             {[
               ["Standort", "Hamburg, Deutschland"],
               ["Gegründet educube GmbH", "2006"],
@@ -950,6 +953,7 @@ export default function UeberPage() {
               <TiltCard key={p.name}>
                 <div
                   data-reveal
+                  className="grid-project-card"
                   style={{
                     background: "rgba(255,255,255,0.04)",
                     border: "1px solid rgba(255,255,255,0.08)",
@@ -1140,6 +1144,7 @@ export default function UeberPage() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div
             data-reveal
+            className="medien-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
