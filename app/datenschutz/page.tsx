@@ -206,6 +206,7 @@ export default function DatenschutzPage() {
             Datenschutz auf einen Blick
           </h2>
           <div
+            className="angebot-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -720,6 +721,7 @@ export default function DatenschutzPage() {
               ].map(([type, duration]) => (
                 <div
                   key={type}
+                  className="grid-legal-row"
                   style={{
                     display: "grid",
                     gridTemplateColumns: "240px 1fr",

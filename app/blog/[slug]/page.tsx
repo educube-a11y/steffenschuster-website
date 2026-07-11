@@ -246,6 +246,7 @@ export default async function BlogPostPage({
 
       {/* ── HERO ── */}
       <section
+        className="blog-hero"
         style={{
           background: DARK_BG,
           padding: "160px 40px 80px",

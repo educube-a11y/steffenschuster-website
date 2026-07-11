@@ -192,7 +192,7 @@ export default function Home() {
           <p data-reveal style={{ fontSize: "clamp(17px, 2vw, 21px)", lineHeight: 1.6, color: "rgba(255,255,255,0.82)", maxWidth: "52ch", margin: "0 0 42px", fontWeight: 400 }}>
             Ich verbinde künstliche Intelligenz mit dem Lernen — und erweitere analoge Lernerfahrungen um das, was KI möglich macht. Lernen ist nicht mein Beruf. Es ist meine Identität.
           </p>
-          <div data-reveal style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+          <div data-reveal className="hero-cta-row" style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
             <a href="#nora" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 30px", borderRadius: 100, background: ACCENT, color: "#16212e", textDecoration: "none", fontSize: 16, fontWeight: 600, boxShadow: "0 8px 30px rgba(255,152,0,0.35)" }}>
               Nora-KI entdecken <span style={{ fontSize: 18 }}>→</span>
             </a>
@@ -213,7 +213,7 @@ export default function Home() {
           <NetworkField seed={31} count={22} color={ACCENT} opacity={0.7} />
         </div>
         <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 70, alignItems: "center" }}>
+          <div className="nora-grid" style={{ display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 70, alignItems: "center" }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 26 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -240,7 +240,7 @@ export default function Home() {
                 Plattform ansehen <span>→</span>
               </a>
             </div>
-            <div data-reveal style={{ position: "relative" }}>
+            <div data-reveal className="nora-mockbrowser" style={{ position: "relative" }}>
               <div style={{ borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px rgba(0,0,0,0.5)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "13px 16px", background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                   {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
@@ -266,7 +266,7 @@ export default function Home() {
       {/* ── PHILOSOPHIE ── */}
       <section id="philosophie" data-light-section style={{ padding: "130px 40px", background: "var(--page-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
+          <div className="philosophie-grid" style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
             <div data-reveal data-parallax-portrait style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
               <Image src="/portrait.png" alt="Steffen Schuster im Gespräch" fill style={{ objectFit: "cover", objectPosition: "center top" }} />
             </div>
@@ -323,7 +323,7 @@ export default function Home() {
           </div>
 
           {/* next.classroom Bild + kiss-U */}
-          <div style={{ display: "grid", gridTemplateColumns: "0.6fr 1fr", gap: 50, alignItems: "center" }}>
+          <div className="kissu-grid" style={{ display: "grid", gridTemplateColumns: "0.6fr 1fr", gap: 50, alignItems: "center" }}>
             <div data-reveal data-parallax-classroom style={{ position: "relative", borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", boxShadow: "0 30px 60px rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <Image src="/nextclassroom.png" alt="Steffen Schuster beim next.classroom" fill style={{ objectFit: "cover", objectPosition: "center" }} />
             </div>
@@ -349,7 +349,7 @@ export default function Home() {
       {/* ── AUSZEICHNUNGEN ── */}
       <section id="auszeichnungen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 70, alignItems: "center", marginBottom: 60 }}>
+          <div className="auszeichnungen-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 70, alignItems: "center", marginBottom: 60 }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 22 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -371,7 +371,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "3/4" }}>
+            <div data-reveal className="auszeichnungen-photo" style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "3/4" }}>
               <Image src="/award-comenius.jpg" alt="Steffen Schuster mit der Comenius EduMedia Medaille" fill style={{ objectFit: "cover", objectPosition: "center top" }} />
             </div>
           </div>
@@ -405,7 +405,7 @@ export default function Home() {
               Vier Wege, an denen ich mit Menschen und Organisationen arbeite.
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+          <div className="angebot-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {offers.map((offer) => (
               <div key={offer.no} data-reveal>
                 <TiltCard
@@ -430,7 +430,7 @@ export default function Home() {
       {/* ── REFERENZEN ── */}
       <section id="referenzen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 70, alignItems: "center", marginBottom: 70 }}>
+          <div className="referenzen-grid" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 70, alignItems: "center", marginBottom: 70 }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 26 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -451,7 +451,7 @@ export default function Home() {
           <div data-reveal className="refs-label" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8a97a6", marginBottom: 22 }}>
             Ausgewählte Referenzen
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+          <div className="referenzen-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {refs.map((ref) => (
               <div key={ref.name} data-reveal className="ref-card" style={{ borderRadius: 18, background: "#fff", border: "1px solid #e4e9ee", overflow: "hidden" }}>
                 {ref.photo && (

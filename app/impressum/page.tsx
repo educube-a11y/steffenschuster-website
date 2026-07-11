@@ -45,6 +45,7 @@ function Section({
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div
+      className="grid-legal-row"
       style={{
         display: "grid",
         gridTemplateColumns: "200px 1fr",
@@ -54,7 +55,7 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
         fontSize: 15,
       }}
     >
-      <span style={{ color: "var(--text-secondary)", fontWeight: 500 }}>
+      <span className="grid-legal-label" style={{ color: "var(--text-secondary)", fontWeight: 500 }}>
         {label}
       </span>
       <span style={{ color: "var(--text-primary)" }}>{value}</span>
