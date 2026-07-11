@@ -521,16 +521,35 @@ export default function DatenschutzPage() {
               </P>
             </Sub>
 
-            <Sub title="Keine Cookies für Analyse oder Marketing">
+            <Sub title="Cookies und Einwilligung (Cookie-Banner)">
               <P>
-                Diese Website setzt keine Analyse-, Tracking- oder
-                Marketing-Cookies. Es werden keine personenbezogenen Daten zu
-                Analysezwecken an externe Dienste übermittelt.
+                Diese Website zeigt beim ersten Besuch einen Cookie-Banner, über den
+                Sie Ihre Einwilligung zur Verwendung nicht notwendiger Cookies erteilen
+                oder verweigern können. Rechtsgrundlage für die Verarbeitung nach
+                erteilter Einwilligung ist Art. 6 Abs. 1 lit. a DSGVO.
               </P>
               <P>
-                Technisch notwendige Maßnahmen (z.B. zur sicheren
-                Bereitstellung der Verbindung) erfolgen auf Grundlage von
-                Art. 6 Abs. 1 lit. f DSGVO.
+                Ihre Entscheidung wird lokal in Ihrem Browser gespeichert
+                (localStorage, Schlüssel: <code>cookie-consent</code>, Wert:{" "}
+                <code>accepted</code> oder <code>rejected</code>). Diese Information
+                wird nicht an Server übertragen.
+              </P>
+              <P>
+                <strong>Technisch notwendige Cookies</strong> werden unabhängig von
+                Ihrer Entscheidung gesetzt, soweit sie für den Betrieb der Website
+                erforderlich sind (Art. 6 Abs. 1 lit. f DSGVO).
+              </P>
+              <P>
+                <strong>Nicht notwendige Cookies</strong> (z.B. Analyse- oder
+                Marketing-Cookies) werden derzeit nicht eingesetzt. Sollten sie in
+                Zukunft verwendet werden, erfolgt dies ausschließlich nach Ihrer
+                ausdrücklichen Einwilligung über den Cookie-Banner.
+              </P>
+              <P>
+                <strong>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit
+                widerrufen, indem Sie den Eintrag <code>cookie-consent</code> in den
+                Browser-Einstellungen unter „Website-Daten" / „localStorage" löschen.
+                Der Cookie-Banner erscheint daraufhin beim nächsten Besuch erneut.
               </P>
             </Sub>
           </Section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { CookieBanner } from "@/components/CookieBanner";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body style={{ margin: 0, WebkitFontSmoothing: "antialiased" }}>
         {children}
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
