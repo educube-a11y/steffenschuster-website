@@ -102,6 +102,7 @@ export default function Home() {
     sameAs: [
       "https://www.linkedin.com/in/steffen-schuster-7297088b/",
       "https://nora-ki.de",
+      "https://www.wikidata.org/wiki/Q140520910",
     ],
     worksFor: {
       "@type": "Organization",
