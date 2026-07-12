@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.steffenschuster.de/sitemap.xml
+Sitemap: https://steffenschuster.de/sitemap.xml

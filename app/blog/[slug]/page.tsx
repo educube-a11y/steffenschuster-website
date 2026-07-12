@@ -199,6 +199,10 @@ export default async function BlogPostPage({
       "@type": "Person",
       name: post.author.name,
       url: `${SITE_URL}/ueber`,
+      sameAs: [
+        "https://www.linkedin.com/in/steffen-schuster-7297088b/",
+        "https://www.wikidata.org/wiki/Q140520910",
+      ],
     },
     publisher: {
       "@type": "Person",
