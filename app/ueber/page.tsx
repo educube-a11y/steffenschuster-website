@@ -35,7 +35,7 @@ const personSchema = {
   url: SITE_URL,
   sameAs: [
     "https://nora-ki.de",
-    "https://www.linkedin.com/in/steffenschuster",
+    "https://www.linkedin.com/in/steffen-schuster-7297088b/",
   ],
   jobTitle: "Pädagoge, KI-Pionier & Gründer",
   description:

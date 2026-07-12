@@ -100,7 +100,7 @@ export default function Home() {
       addressCountry: "DE",
     },
     sameAs: [
-      "https://www.linkedin.com/in/steffenschuster",
+      "https://www.linkedin.com/in/steffen-schuster-7297088b/",
       "https://nora-ki.de",
     ],
     worksFor: {
