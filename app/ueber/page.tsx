@@ -9,7 +9,7 @@ import { ScrollAnimations } from "@/components/ScrollAnimations";
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";
-const SITE_URL = "https://www.steffenschuster.de";
+const SITE_URL = "https://steffenschuster.de";
 
 export const metadata: Metadata = {
   title: "Über Steffen Schuster — Pädagoge, KI-Pionier & Gründer aus Hamburg",

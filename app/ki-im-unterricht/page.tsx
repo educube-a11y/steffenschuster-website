@@ -6,7 +6,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";
-const SITE_URL = "https://www.steffenschuster.de";
+const SITE_URL = "https://steffenschuster.de";
 
 export const metadata: Metadata = {
   title: "KI im Unterricht — Definition, Chancen & Perspektiven | Steffen Schuster",

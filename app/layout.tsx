@@ -22,7 +22,7 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const SITE_URL = "https://www.steffenschuster.de";
+const SITE_URL = "https://steffenschuster.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

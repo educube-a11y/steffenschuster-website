@@ -197,10 +197,10 @@ export default function ImpressumPage() {
               label="Website"
               value={
                 <a
-                  href="https://www.steffenschuster.de"
+                  href="https://steffenschuster.de"
                   style={{ color: PRIMARY, textDecoration: "none" }}
                 >
-                  www.steffenschuster.de
+                  steffenschuster.de
                 </a>
               }
             />

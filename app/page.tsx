@@ -91,7 +91,7 @@ export default function Home() {
     "@type": "Person",
     name: "Steffen Schuster",
     jobTitle: "Pädagoge und KI-Berater",
-    url: "https://www.steffenschuster.de",
+    url: "https://steffenschuster.de",
     email: "info@steffenschuster.de",
     address: {
       "@type": "PostalAddress",
@@ -100,13 +100,13 @@ export default function Home() {
       addressCountry: "DE",
     },
     sameAs: [
-      "https://www.linkedin.com/in/steffen-schuster-7297088b/",
-      "https://www.nora-ki.de",
+      "https://www.linkedin.com/in/steffenschuster",
+      "https://nora-ki.de",
     ],
     worksFor: {
       "@type": "Organization",
-      name: "edu:cube GmbH",
-      url: "https://www.nora-ki.de",
+      name: "educube GmbH",
+      url: "https://nora-ki.de",
     },
     knowsAbout: [
       "Künstliche Intelligenz",
@@ -125,7 +125,7 @@ export default function Home() {
     name: "Steffen Schuster — KI-Beratung & Bildung",
     description:
       "KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung für Unternehmen und Bildungseinrichtungen.",
-    url: "https://www.steffenschuster.de",
+    url: "https://steffenschuster.de",
     email: "info@steffenschuster.de",
     address: {
       "@type": "PostalAddress",
