@@ -123,7 +123,7 @@ export default function Home() {
   const jsonLdService = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Steffen Schuster — KI-Beratung & Bildung",
+    name: "Steffen Schuster",
     description:
       "KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung für Unternehmen und Bildungseinrichtungen.",
     url: "https://steffenschuster.de",
