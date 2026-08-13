@@ -11,7 +11,7 @@ async function getContent(slug: string): Promise<string | null> {
     try {
       const { getStore } = await import("@netlify/blobs");
       const store = getStore("blog-content");
-      const content = await store.get(slug);
+      const content = await store.get(slug, { type: "text" });
       if (content) return content;
     } catch (err) {
       console.error("Blobs Lesefehler:", err);

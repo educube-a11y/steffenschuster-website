@@ -61,7 +61,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     try {
       const { getStore } = await import("@netlify/blobs");
       const store = getStore("blog-content");
-      const raw = await store.get(slug);
+      const raw = await store.get(slug, { type: "text" });
       if (raw) {
         const { data, content } = matter(raw);
         return {

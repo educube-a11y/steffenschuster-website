@@ -17,7 +17,7 @@ export async function GET(
     try {
       const { getStore } = await import("@netlify/blobs");
       const store = getStore("blog-content");
-      const content = await store.get(slug);
+      const content = await store.get(slug, { type: "text" });
       if (content) {
         return new NextResponse(content, {
           headers: { "Content-Type": "text/plain; charset=utf-8" },
