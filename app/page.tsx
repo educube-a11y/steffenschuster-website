@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { LogoMark } from "@/components/LogoMark";
 import { NetworkField } from "@/components/NetworkField";
@@ -11,7 +10,6 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { CursorTrail } from "@/components/CursorTrail";
 import { HeroHeadline } from "@/components/HeroHeadline";
 import { NeuralCanvas } from "@/components/NeuralCanvas";
-import { getAllPosts, formatDate } from "@/lib/blog";
 
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
@@ -91,7 +89,7 @@ export default function Home() {
     "@type": "Person",
     name: "Steffen Schuster",
     jobTitle: "Pädagoge und KI-Berater",
-    url: "https://steffenschuster.de",
+    url: "https://www.steffenschuster.de",
     email: "info@steffenschuster.de",
     address: {
       "@type": "PostalAddress",
@@ -101,13 +99,12 @@ export default function Home() {
     },
     sameAs: [
       "https://www.linkedin.com/in/steffen-schuster-7297088b/",
-      "https://nora-ki.de",
-      "https://www.wikidata.org/wiki/Q140520910",
+      "https://www.nora-ki.de",
     ],
     worksFor: {
       "@type": "Organization",
-      name: "educube GmbH",
-      url: "https://nora-ki.de",
+      name: "edu:cube GmbH",
+      url: "https://www.nora-ki.de",
     },
     knowsAbout: [
       "Künstliche Intelligenz",
@@ -123,10 +120,10 @@ export default function Home() {
   const jsonLdService = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Steffen Schuster",
+    name: "Steffen Schuster — KI-Beratung & Bildung",
     description:
       "KI-Training, Lernumgebungen, Facilitation und Organisationsentwicklung für Unternehmen und Bildungseinrichtungen.",
-    url: "https://steffenschuster.de",
+    url: "https://www.steffenschuster.de",
     email: "info@steffenschuster.de",
     address: {
       "@type": "PostalAddress",
@@ -170,6 +167,7 @@ export default function Home() {
       {/* ── HERO ── */}
       <section
         id="hero"
+        className="hero-section"
         style={{
           position: "relative",
           minHeight: "100vh",
@@ -185,7 +183,7 @@ export default function Home() {
         <div style={{ position: "relative", maxWidth: 1180, margin: "0 auto", width: "100%", zIndex: 2 }}>
           <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "7px 16px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.22)", background: "rgba(255,255,255,0.06)", marginBottom: 34 }}>
             <span style={{ width: 7, height: 7, borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
-            <span style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase" }}>
+            <span className="hero-badge-text" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13, fontWeight: 500, letterSpacing: "1.5px", textTransform: "uppercase" }}>
               Pädagoge · KI-Pionier · Gestalter
             </span>
           </div>
@@ -193,7 +191,7 @@ export default function Home() {
           <p data-reveal style={{ fontSize: "clamp(17px, 2vw, 21px)", lineHeight: 1.6, color: "rgba(255,255,255,0.82)", maxWidth: "52ch", margin: "0 0 42px", fontWeight: 400 }}>
             Ich verbinde künstliche Intelligenz mit dem Lernen — und erweitere analoge Lernerfahrungen um das, was KI möglich macht. Lernen ist nicht mein Beruf. Es ist meine Identität.
           </p>
-          <div data-reveal className="hero-cta-row" style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
+          <div data-reveal className="hero-cta-group" style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap" }}>
             <a href="#nora" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 30px", borderRadius: 100, background: ACCENT, color: "#16212e", textDecoration: "none", fontSize: 16, fontWeight: 600, boxShadow: "0 8px 30px rgba(255,152,0,0.35)" }}>
               Nora-KI entdecken <span style={{ fontSize: 18 }}>→</span>
             </a>
@@ -209,12 +207,12 @@ export default function Home() {
       </section>
 
       {/* ── NORA-KI ── */}
-      <section id="nora" style={{ position: "relative", padding: "130px 40px", background: "#0f1f2e", overflow: "hidden" }}>
+      <section id="nora" className="section-px" style={{ position: "relative", padding: "130px 40px", background: "#0f1f2e", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-10%", right: "-8%", width: "50%", opacity: 0.16, pointerEvents: "none" }}>
           <NetworkField seed={31} count={22} color={ACCENT} opacity={0.7} />
         </div>
         <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
-          <div className="nora-grid" style={{ display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 70, alignItems: "center" }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 70, alignItems: "center" }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 26 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -229,7 +227,7 @@ export default function Home() {
               <p data-reveal style={{ fontSize: 16.5, lineHeight: 1.7, color: "rgba(255,255,255,0.58)", margin: "0 0 36px" }}>
                 Aus Jahrzehnten im Bau digitaler Lernwelten entstanden, stellt Nora-KI diverse KI-basierte Apps zum Lernen und zur Ausbildung bereit. Technologie soll das Menschliche im Lernen stärken, nicht ersetzen.
               </p>
-              <div data-reveal style={{ display: "flex", gap: 40, flexWrap: "wrap", marginBottom: 38 }}>
+              <div data-reveal className="nora-stats" style={{ display: "flex", gap: 40, flexWrap: "wrap", marginBottom: 38 }}>
                 {[{ value: "∞", label: "adaptive Lernpfade", a: true }, { value: "2", label: "Welten, eine Brücke", a: false }, { value: "∂", label: "menschzentriert", a: false }].map(({ value, label, a }) => (
                   <div key={label}>
                     <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 40, color: a ? ACCENT : "#fff", lineHeight: 1 }}>{value}</div>
@@ -241,7 +239,7 @@ export default function Home() {
                 Plattform ansehen <span>→</span>
               </a>
             </div>
-            <div data-reveal className="nora-mockbrowser" style={{ position: "relative" }}>
+            <div data-reveal style={{ position: "relative" }}>
               <div style={{ borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px rgba(0,0,0,0.5)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "13px 16px", background: "rgba(255,255,255,0.04)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                   {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
@@ -265,10 +263,10 @@ export default function Home() {
       </section>
 
       {/* ── PHILOSOPHIE ── */}
-      <section id="philosophie" data-light-section style={{ padding: "130px 40px", background: "var(--page-bg)" }}>
+      <section id="philosophie" data-light-section className="section-px" style={{ padding: "130px 40px", background: "var(--page-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div className="philosophie-grid" style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
-            <div data-reveal data-parallax-portrait style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "0.85fr 1.15fr", gap: 70, alignItems: "center" }}>
+            <div data-reveal data-parallax-portrait className="philosophie-portrait" style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "4/5" }}>
               <Image src="/portrait.png" alt="Steffen Schuster im Gespräch" fill style={{ objectFit: "cover", objectPosition: "center top" }} />
             </div>
             <div>
@@ -296,7 +294,7 @@ export default function Home() {
       </section>
 
       {/* ── MEILENSTEINE ── */}
-      <section id="meilensteine" style={{ position: "relative", padding: "130px 40px", background: "#0f1f2e", overflow: "hidden" }}>
+      <section id="meilensteine" className="section-px" style={{ position: "relative", padding: "130px 40px", background: "#0f1f2e", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: "40%", opacity: 0.12, pointerEvents: "none" }}>
           <NetworkField seed={17} count={20} color="#ffffff" opacity={0.5} />
         </div>
@@ -311,9 +309,9 @@ export default function Home() {
             </h2>
           </div>
 
-          <div data-milestone-grid style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
+          <div data-milestone-grid className="milestone-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 2, marginBottom: 70 }}>
             {milestones.map((m, i) => (
-              <div key={m.year} data-milestone-card style={{ position: "relative" }}>
+              <div key={m.year} data-milestone-card className="milestone-card" style={{ position: "relative" }}>
                 <TiltCard style={{ padding: "32px 28px", background: i % 2 === 0 ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", height: "100%" }}>
                   <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 16 }}>{m.year}</div>
                   <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 24, color: "#fff", margin: "0 0 12px", lineHeight: 1.1 }}>{m.title}</h3>
@@ -324,7 +322,7 @@ export default function Home() {
           </div>
 
           {/* next.classroom Bild + kiss-U */}
-          <div className="kissu-grid" style={{ display: "grid", gridTemplateColumns: "0.6fr 1fr", gap: 50, alignItems: "center" }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "0.6fr 1fr", gap: 50, alignItems: "center" }}>
             <div data-reveal data-parallax-classroom style={{ position: "relative", borderRadius: 18, overflow: "hidden", aspectRatio: "3/4", boxShadow: "0 30px 60px rgba(0,0,0,0.4)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <Image src="/nextclassroom.png" alt="Steffen Schuster beim next.classroom" fill style={{ objectFit: "cover", objectPosition: "center" }} />
             </div>
@@ -348,9 +346,9 @@ export default function Home() {
       </section>
 
       {/* ── AUSZEICHNUNGEN ── */}
-      <section id="auszeichnungen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
+      <section id="auszeichnungen" data-light-section className="section-px" style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div className="auszeichnungen-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 70, alignItems: "center", marginBottom: 60 }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 70, alignItems: "center", marginBottom: 60 }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 22 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -372,16 +370,16 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div data-reveal className="auszeichnungen-photo" style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "3/4" }}>
+            <div data-reveal style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 30px 60px rgba(20,40,60,0.18)", aspectRatio: "3/4" }}>
               <Image src="/award-comenius.jpg" alt="Steffen Schuster mit der Comenius EduMedia Medaille" fill style={{ objectFit: "cover", objectPosition: "center top" }} />
             </div>
           </div>
 
           {/* Award-Foto BZLT */}
-          <div data-reveal data-parallax-award style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 20px 50px rgba(20,40,60,0.12)", aspectRatio: "21/9" }}>
+          <div data-reveal data-parallax-award className="award-panorama" style={{ position: "relative", borderRadius: 18, overflow: "hidden", boxShadow: "0 20px 50px rgba(20,40,60,0.12)", aspectRatio: "21/9" }}>
             <Image src="/award-elearning.jpg" alt="eLearning Award 2019 — next.classroom, edu:cube GmbH" fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />
             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15,31,46,0.85) 0%, rgba(15,31,46,0.3) 60%, transparent 100%)" }} />
-            <div style={{ position: "absolute", inset: 0, padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+            <div className="award-panorama-overlay" style={{ position: "absolute", inset: 0, padding: "48px 56px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
               <div style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: ACCENT, letterSpacing: "2px", marginBottom: 12 }}>eLearning Award 2019</div>
               <p style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(22px, 3vw, 36px)", color: "#fff", margin: 0, lineHeight: 1.2, maxWidth: "40ch" }}>
                 „next:classroom Cross Media eLearning" — Projekt des Jahres, Platz 2
@@ -392,7 +390,7 @@ export default function Home() {
       </section>
 
       {/* ── ANGEBOT ── */}
-      <section id="angebot" data-light-section style={{ position: "relative", padding: "130px 40px", background: "var(--page-bg)", overflow: "hidden" }}>
+      <section id="angebot" data-light-section className="section-px" style={{ position: "relative", padding: "130px 40px", background: "var(--page-bg)", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: "-15%", left: "-5%", width: "42%", opacity: 0.4, pointerEvents: "none" }}>
           <NetworkField seed={53} count={24} color={PRIMARY} opacity={0.5} />
         </div>
@@ -406,7 +404,7 @@ export default function Home() {
               Vier Wege, an denen ich mit Menschen und Organisationen arbeite.
             </h2>
           </div>
-          <div className="angebot-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {offers.map((offer) => (
               <div key={offer.no} data-reveal>
                 <TiltCard
@@ -429,9 +427,9 @@ export default function Home() {
       </section>
 
       {/* ── REFERENZEN ── */}
-      <section id="referenzen" data-light-section style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
+      <section id="referenzen" data-light-section className="section-px" style={{ padding: "130px 40px", background: "var(--section-alt-bg)" }}>
         <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-          <div className="referenzen-grid" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 70, alignItems: "center", marginBottom: 70 }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 70, alignItems: "center", marginBottom: 70 }}>
             <div>
               <div data-reveal style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 26 }}>
                 <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
@@ -452,7 +450,7 @@ export default function Home() {
           <div data-reveal className="refs-label" style={{ fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#8a97a6", marginBottom: 22 }}>
             Ausgewählte Referenzen
           </div>
-          <div className="referenzen-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+          <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {refs.map((ref) => (
               <div key={ref.name} data-reveal className="ref-card" style={{ borderRadius: 18, background: "#fff", border: "1px solid #e4e9ee", overflow: "hidden" }}>
                 {ref.photo && (
@@ -460,7 +458,7 @@ export default function Home() {
                     <Image src={ref.photo} alt={ref.name} fill style={{ objectFit: "cover", objectPosition: "center 30%" }} />
                   </div>
                 )}
-                <div style={{ padding: 34, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 20 }}>
+                <div className="ref-card-content" style={{ padding: 34, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 20 }}>
                   <div>
                     <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 600, fontSize: 26, color: "#16212e", margin: "0 0 8px" }}>{ref.name}</h3>
                     <p style={{ fontSize: 15, lineHeight: 1.6, color: "#56636f", margin: 0 }}>{ref.body}</p>
@@ -473,154 +471,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── BLOG VORSCHAU ── */}
-      {(() => {
-        const posts = getAllPosts().slice(0, 3);
-        if (posts.length === 0) return null;
-        return (
-          <section
-            data-light-section
-            style={{ background: "var(--section-alt-bg)", padding: "100px 40px 110px" }}
-          >
-            <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-              <div
-                data-reveal
-                style={{
-                  display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                  gap: 20,
-                  marginBottom: 56,
-                }}
-              >
-                <div>
-                  <p
-                    style={{
-                      fontFamily: "var(--font-jetbrains), monospace",
-                      fontSize: 11,
-                      letterSpacing: "0.18em",
-                      color: ACCENT,
-                      textTransform: "uppercase",
-                      marginBottom: 14,
-                    }}
-                  >
-                    Aus dem Blog
-                  </p>
-                  <h2
-                    style={{
-                      fontFamily: "var(--font-cormorant), serif",
-                      fontWeight: 500,
-                      fontSize: "clamp(32px, 4vw, 52px)",
-                      lineHeight: 1.05,
-                      color: "var(--text-primary)",
-                      margin: 0,
-                    }}
-                  >
-                    Gedanken aus der Praxis
-                  </h2>
-                </div>
-                <Link
-                  href="/blog"
-                  style={{
-                    fontSize: 15,
-                    color: PRIMARY,
-                    textDecoration: "none",
-                    fontWeight: 500,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  Alle Artikel →
-                </Link>
-              </div>
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                  gap: 24,
-                }}
-              >
-                {posts.map((post) => (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <article
-                      data-reveal
-                      style={{
-                        padding: "32px 28px",
-                        borderRadius: 16,
-                        border: "1px solid var(--card-border)",
-                        background: "var(--card-bg)",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 16,
-                        transition: "border-color 0.2s, transform 0.2s",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontFamily: "var(--font-jetbrains), monospace",
-                          fontSize: 11,
-                          letterSpacing: "0.12em",
-                          color: "var(--text-secondary)",
-                          textTransform: "uppercase",
-                          margin: 0,
-                        }}
-                      >
-                        {formatDate(post.date)}
-                      </p>
-                      <h3
-                        style={{
-                          fontFamily: "var(--font-cormorant), serif",
-                          fontSize: "clamp(20px, 2vw, 24px)",
-                          fontWeight: 500,
-                          color: "var(--text-primary)",
-                          lineHeight: 1.25,
-                          margin: 0,
-                          flex: 1,
-                        }}
-                      >
-                        {post.title}
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: 14,
-                          lineHeight: 1.65,
-                          color: "var(--text-secondary)",
-                          margin: 0,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {post.description}
-                      </p>
-                      <span
-                        style={{
-                          fontSize: 14,
-                          color: ACCENT,
-                          fontWeight: 500,
-                          marginTop: "auto",
-                        }}
-                      >
-                        Weiterlesen →
-                      </span>
-                    </article>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })()}
-
       {/* ── KONTAKT ── */}
-      <section id="kontakt" style={{ position: "relative", padding: "150px 40px", background: "radial-gradient(120% 100% at 50% 0%, #3a6892 0%, #2b5274 50%, #1b3953 100%)", overflow: "hidden", textAlign: "center" }}>
+      <section id="kontakt" className="section-px" style={{ position: "relative", padding: "150px 40px", background: "radial-gradient(120% 100% at 50% 0%, #3a6892 0%, #2b5274 50%, #1b3953 100%)", overflow: "hidden", textAlign: "center" }}>
         <div style={{ position: "absolute", inset: 0, opacity: 0.4, pointerEvents: "none" }}>
           <NetworkField seed={7} count={26} color="#ffffff" opacity={0.5} />
         </div>
@@ -635,7 +487,7 @@ export default function Home() {
           <p data-reveal style={{ fontSize: 19, lineHeight: 1.6, color: "rgba(255,255,255,0.78)", margin: "0 0 42px" }}>
             Ein Gespräch ist der beste Anfang. Über KI, über Lernen, über das, was dazwischen entsteht.
           </p>
-          <div data-reveal style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+          <div data-reveal className="cta-group" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
             <a href="/kontakt" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "17px 34px", borderRadius: 100, background: ACCENT, color: "#16212e", textDecoration: "none", fontSize: 16.5, fontWeight: 600, boxShadow: "0 10px 34px rgba(255,152,0,0.35)" }}>
               Gespräch starten <span>→</span>
             </a>
@@ -643,7 +495,7 @@ export default function Home() {
               LinkedIn
             </a>
           </div>
-          <div data-reveal style={{ marginTop: 70, paddingTop: 30, borderTop: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
+          <div data-reveal className="kontakt-footer-bar" style={{ marginTop: 70, paddingTop: 30, borderTop: "1px solid rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
             <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 19, color: "rgba(255,255,255,0.85)" }}>Steffen Schuster</span>
             <span style={{ fontFamily: "var(--font-jetbrains), monospace", fontSize: 12, color: "rgba(255,255,255,0.45)", letterSpacing: "1px" }}>steffen@educube.de</span>
           </div>
@@ -701,6 +553,7 @@ export default function Home() {
             {[
               { label: "Startseite", href: "/" },
               { label: "Über mich", href: "/ueber" },
+              { label: "Bücher", href: "/autor" },
               { label: "nora-ki.de", href: "https://nora-ki.de" },
               { label: "educube.de", href: "https://www.educube.de/" },
               { label: "Kontakt", href: "/kontakt" },

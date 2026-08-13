@@ -53,7 +53,33 @@ export function getAllPosts(): PostMeta[] {
   );
 }
 
-export function getPostBySlug(slug: string): Post | null {
+/** Lädt einen Blog-Artikel — prüft zuerst Netlify Blobs (Admin-Änderungen),
+ *  fällt dann auf das Dateisystem zurück. */
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  // Netlify Blobs (vom Admin gespeicherte Versionen, sofort live)
+  if (process.env.NETLIFY) {
+    try {
+      const { getStore } = await import("@netlify/blobs");
+      const store = getStore("blog-content");
+      const raw = await store.get(slug);
+      if (raw) {
+        const { data, content } = matter(raw);
+        return {
+          slug,
+          title: data.title ?? slug,
+          date: data.date ?? "",
+          description: data.description ?? "",
+          author: data.author ?? { name: "Steffen Schuster", bio: "" },
+          faq: data.faq ?? [],
+          content,
+        };
+      }
+    } catch (err) {
+      console.error("Blobs Lesefehler:", err);
+    }
+  }
+
+  // Fallback: Dateisystem
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) return null;
 

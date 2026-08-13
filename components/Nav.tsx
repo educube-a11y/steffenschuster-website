@@ -10,10 +10,12 @@ export function Nav() {
   const base = isHome ? "" : "/";
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // Menü bei Route-Wechsel schließen
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
-  // Prevent body scroll when menu is open
+  // Body-Scroll sperren wenn Menü offen
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -26,13 +28,6 @@ export function Nav() {
     [`${base}#angebot`, "Angebot"],
   ];
 
-  const allLinks: [string, string][] = [
-    ...mainLinks,
-    ["/ueber", "Über mich"],
-    ["/blog", "Blog"],
-    ["/kontakt", "Kontakt"],
-  ];
-
   return (
     <>
       <nav
@@ -42,7 +37,7 @@ export function Nav() {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 200,
+          zIndex: 100,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -66,22 +61,20 @@ export function Nav() {
         >
           <LogoMark size={34} />
           <span
-            className="nav-logo-text"
             style={{
               fontFamily: "var(--font-cormorant), serif",
               fontSize: 22,
               fontWeight: 600,
               color: "#fff",
               letterSpacing: "0.5px",
-              whiteSpace: "nowrap",
             }}
           >
             Steffen Schuster
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 28 }}>
+        {/* Desktop-Links */}
+        <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center", gap: 28 }}>
           {mainLinks.map(([href, label]) => (
             <a
               key={href}
@@ -110,16 +103,16 @@ export function Nav() {
             Über mich
           </a>
           <a
-            href="/blog"
+            href="/autor"
             style={{
-              color: pathname?.startsWith("/blog") ? "#ff9800" : "rgba(255,255,255,0.78)",
+              color: pathname === "/autor" || pathname.startsWith("/buecher") ? "#ff9800" : "rgba(255,255,255,0.78)",
               textDecoration: "none",
               fontSize: 14.5,
-              fontWeight: pathname?.startsWith("/blog") ? 600 : 500,
+              fontWeight: pathname === "/autor" || pathname.startsWith("/buecher") ? 600 : 500,
               letterSpacing: "0.2px",
             }}
           >
-            Blog
+            Bücher
           </a>
           <ThemeToggle />
           <a
@@ -140,22 +133,25 @@ export function Nav() {
           </a>
         </div>
 
-        {/* Mobile: theme toggle + hamburger */}
-        <div className="nav-mobile" style={{ display: "none", alignItems: "center", gap: 14 }}>
+        {/* Mobile-Steuerung: ThemeToggle + Hamburger */}
+        <div className="nav-mobile-controls" style={{ display: "none", alignItems: "center", gap: 12 }}>
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Menü schließen" : "Menü öffnen"}
             aria-expanded={menuOpen}
             style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "6px 4px",
               display: "flex",
               flexDirection: "column",
-              gap: 5,
+              justifyContent: "center",
               alignItems: "center",
+              width: 40,
+              height: 40,
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              gap: 5,
             }}
           >
             <span
@@ -176,7 +172,7 @@ export function Nav() {
                 height: 2,
                 background: "#fff",
                 borderRadius: 2,
-                transition: "opacity 0.2s",
+                transition: "opacity 0.25s",
                 opacity: menuOpen ? 0 : 1,
               }}
             />
@@ -195,81 +191,109 @@ export function Nav() {
         </div>
       </nav>
 
-      {/* Mobile overlay menu */}
-      <div
-        className="nav-overlay"
-        aria-hidden={!menuOpen}
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 199,
-          background: "rgba(8,15,23,0.97)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "80px 32px 48px",
-          gap: 0,
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
-          transition: "opacity 0.25s",
-        }}
-      >
-        <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          {allLinks.map(([href, label]) => {
-            const active =
-              pathname === href ||
-              (href.startsWith("/blog") && pathname?.startsWith("/blog"));
-            return (
+      {/* Mobile Menü-Drawer */}
+      {menuOpen && (
+        <div
+          className="mobile-menu-overlay"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 99,
+            background: "rgba(0,0,0,0.4)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+          }}
+        >
+          <div
+            className="mobile-menu-drawer"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              background: "rgba(9,18,30,0.97)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              borderBottom: "1px solid rgba(255,255,255,0.1)",
+              padding: "84px 24px 36px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            {mainLinks.map(([href, label]) => (
               <a
                 key={href}
                 href={href}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontSize: 38,
-                  fontWeight: 500,
-                  color: active ? "#ff9800" : "#fff",
+                  color: "rgba(255,255,255,0.8)",
                   textDecoration: "none",
-                  lineHeight: 1.25,
-                  padding: "8px 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.06)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  padding: "12px 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.07)",
+                  fontFamily: "var(--font-cormorant), serif",
                 }}
               >
                 {label}
               </a>
-            );
-          })}
-        </nav>
-        <a
-          href="/kontakt#formular"
-          onClick={() => setMenuOpen(false)}
-          style={{
-            marginTop: 32,
-            display: "inline-flex",
-            alignItems: "center",
-            alignSelf: "flex-start",
-            padding: "14px 28px",
-            borderRadius: 100,
-            background: "#ff9800",
-            color: "#16212e",
-            textDecoration: "none",
-            fontSize: 16,
-            fontWeight: 700,
-          }}
-        >
-          Gespräch starten →
-        </a>
-      </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .site-nav { padding: 14px 20px !important; }
-          .nav-desktop { display: none !important; }
-          .nav-mobile { display: flex !important; }
-        }
-      `}</style>
+            ))}
+            <a
+              href="/ueber"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                color: pathname === "/ueber" ? "#ff9800" : "rgba(255,255,255,0.8)",
+                textDecoration: "none",
+                fontSize: 22,
+                fontWeight: pathname === "/ueber" ? 600 : 500,
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+                fontFamily: "var(--font-cormorant), serif",
+              }}
+            >
+              Über mich
+            </a>
+            <a
+              href="/autor"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                color: pathname === "/autor" || pathname.startsWith("/buecher") ? "#ff9800" : "rgba(255,255,255,0.8)",
+                textDecoration: "none",
+                fontSize: 22,
+                fontWeight: pathname === "/autor" || pathname.startsWith("/buecher") ? 600 : 500,
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+                fontFamily: "var(--font-cormorant), serif",
+              }}
+            >
+              Bücher
+            </a>
+            <div style={{ paddingTop: 24 }}>
+              <a
+                href="/kontakt#formular"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "15px 24px",
+                  borderRadius: 100,
+                  background: "#ff9800",
+                  color: "#16212e",
+                  textDecoration: "none",
+                  fontSize: 16,
+                  fontWeight: 700,
+                }}
+              >
+                Gespräch starten →
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

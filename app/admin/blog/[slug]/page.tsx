@@ -1,23 +1,43 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
-import MdxEditor from "./MdxEditor";
+import { EditorClient } from "./EditorClient";
+import fs from "fs/promises";
+import path from "path";
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+export const dynamic = "force-dynamic";
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
-export default async function AdminBlogEditPage({ params }: Props) {
-  const { slug } = await params;
-  const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
-
-  if (!fs.existsSync(filePath)) {
-    notFound();
+async function getContent(slug: string): Promise<string | null> {
+  // ── Netlify Blobs zuerst (enthält von Admin gespeicherte Versionen) ────────
+  if (process.env.NETLIFY) {
+    try {
+      const { getStore } = await import("@netlify/blobs");
+      const store = getStore("blog-content");
+      const content = await store.get(slug);
+      if (content) return content;
+    } catch (err) {
+      console.error("Blobs Lesefehler:", err);
+    }
   }
 
-  const initialContent = fs.readFileSync(filePath, "utf-8");
+  // ── Fallback: Dateisystem ─────────────────────────────────────────────────
+  try {
+    const filePath = path.join(process.cwd(), "content/blog", `${slug}.mdx`);
+    return await fs.readFile(filePath, "utf-8");
+  } catch {
+    return null;
+  }
+}
 
-  return <MdxEditor slug={slug} initialContent={initialContent} />;
+export default async function AdminEditorPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  if (!/^[a-z0-9-]+$/.test(slug)) notFound();
+
+  const content = await getContent(slug);
+  if (content === null) notFound();
+
+  return <EditorClient slug={slug} initialContent={content} />;
 }

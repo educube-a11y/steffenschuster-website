@@ -10,6 +10,8 @@ import { ScrollAnimations } from "@/components/ScrollAnimations";
 import { getAllPosts, getPostBySlug, formatDate } from "@/lib/blog";
 import "../blog.css";
 
+export const dynamic = "force-dynamic";
+
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";
@@ -25,7 +27,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
 
   return {
@@ -184,7 +186,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   const jsonLd = {

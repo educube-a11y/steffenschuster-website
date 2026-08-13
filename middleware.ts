@@ -1,47 +1,63 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-async function getExpectedToken(): Promise<string> {
-  const secret = process.env.SESSION_SECRET ?? "dev-fallback-secret";
-  const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"]
-  );
-  const sig = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    encoder.encode("admin:authenticated")
-  );
-  return Array.from(new Uint8Array(sig))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+const COOKIE_NAME = "ss-admin";
+const SECRET = process.env.AUTH_SECRET ?? "ss-blog-secret-please-change-in-prod";
+
+/** HMAC-Verifikation via Web Crypto API (Edge-Runtime-kompatibel) */
+async function verifySession(token: string): Promise<boolean> {
+  try {
+    const decoded  = atob(token);
+    const lastDot  = decoded.lastIndexOf(".");
+    if (lastDot === -1) return false;
+
+    const ts  = decoded.slice(0, lastDot);
+    const mac = decoded.slice(lastDot + 1);
+
+    const age = Date.now() - parseInt(ts, 10);
+    if (isNaN(age) || age < 0 || age > 7 * 24 * 60 * 60 * 1000) return false;
+
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(SECRET),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+    const macBytes = Uint8Array.from(
+      mac.match(/.{2}/g)?.map((b) => parseInt(b, 16)) ?? []
+    );
+    return await crypto.subtle.verify("HMAC", key, macBytes, enc.encode(ts));
+  } catch {
+    return false;
+  }
 }
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isAdminPage = pathname.startsWith("/admin");
-  const isAdminApi = pathname.startsWith("/api/admin");
+  // Login-Seite und Login-API immer durchlassen
+  const isPublic =
+    pathname === "/admin" ||
+    pathname === "/admin/" ||
+    pathname === "/api/admin/login";
 
-  if (!isAdminPage && !isAdminApi) return NextResponse.next();
+  if (isPublic) return NextResponse.next();
 
-  // Login-Endpunkte freigeben
-  if (pathname === "/admin/login" || pathname === "/api/admin/login") {
-    return NextResponse.next();
-  }
+  // Alle anderen /admin/* und /api/admin/* Routen schützen
+  const needsAuth =
+    pathname.startsWith("/admin/") ||
+    pathname.startsWith("/api/admin/");
 
-  const session = request.cookies.get("admin-session")?.value;
-  const expected = await getExpectedToken();
-
-  if (!session || session !== expected) {
-    if (isAdminApi) {
-      return NextResponse.json({ error: "Nicht autorisiert" }, { status: 401 });
+  if (needsAuth) {
+    const token = request.cookies.get(COOKIE_NAME)?.value;
+    if (!token || !(await verifySession(token))) {
+      if (pathname.startsWith("/api/")) {
+        return NextResponse.json({ error: "Nicht autorisiert" }, { status: 401 });
+      }
+      return NextResponse.redirect(new URL("/admin", request.url));
     }
-    return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
   return NextResponse.next();

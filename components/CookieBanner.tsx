@@ -1,31 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
-const CONSENT_KEY = "cookie-consent";
-
-export type CookieConsent = "accepted" | "rejected";
+const ACCENT = "#ff9800";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(CONSENT_KEY)) {
-      setVisible(true);
+    const consent = localStorage.getItem("cookie-consent");
+    if (!consent) {
+      // Kleine Verzögerung, damit der Banner nicht sofort beim Laden aufblitzt
+      const timer = setTimeout(() => setVisible(true), 600);
+      return () => clearTimeout(timer);
     }
   }, []);
 
-  function accept() {
-    localStorage.setItem(CONSENT_KEY, "accepted");
+  const handleAccept = () => {
+    localStorage.setItem("cookie-consent", "accepted");
     setVisible(false);
-    window.dispatchEvent(new CustomEvent("cookieConsentAccepted"));
-  }
+    // Analytics-Skripte hier einbinden, sobald verfügbar:
+    // window.dispatchEvent(new CustomEvent("cookieConsent", { detail: "accepted" }));
+  };
 
-  function reject() {
-    localStorage.setItem(CONSENT_KEY, "rejected");
+  const handleDecline = () => {
+    localStorage.setItem("cookie-consent", "declined");
     setVisible(false);
-  }
+  };
 
   if (!visible) return null;
 
@@ -33,139 +34,126 @@ export function CookieBanner() {
     <div
       role="dialog"
       aria-label="Cookie-Einstellungen"
-      aria-modal="false"
+      aria-live="polite"
       style={{
         position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
+        bottom: 24,
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "min(700px, calc(100vw - 48px))",
         zIndex: 9999,
-        background: "#0a1929",
-        borderTop: "2px solid #ff9800",
-        boxShadow: "0 -8px 40px rgba(0,0,0,0.45)",
-        padding: "28px 40px",
+        background: "rgba(12,26,40,0.94)",
+        backdropFilter: "saturate(180%) blur(24px)",
+        WebkitBackdropFilter: "saturate(180%) blur(24px)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        borderRadius: 16,
+        padding: "24px 28px",
+        boxShadow:
+          "0 24px 64px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.07) inset",
+        display: "flex",
+        alignItems: "center",
+        gap: 24,
+        flexWrap: "wrap",
       }}
+      // CSS-Klasse für Mobile-Override
+      className="cookie-banner-inner"
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr auto",
-          gap: "20px 48px",
-          alignItems: "center",
-        }}
-      >
-        {/* Text */}
-        <div>
-          <p
-            style={{
-              fontFamily: "var(--font-cormorant), serif",
-              fontSize: 20,
-              fontWeight: 600,
-              color: "#fff",
-              margin: "0 0 8px",
-              letterSpacing: "0.01em",
-            }}
-          >
-            Diese Website verwendet Cookies
-          </p>
-          <p
-            style={{
-              fontSize: 14,
-              lineHeight: 1.65,
-              color: "rgba(255,255,255,0.55)",
-              margin: 0,
-              maxWidth: 680,
-            }}
-          >
-            Wir setzen technisch notwendige Cookies ein, die für den Betrieb der Website erforderlich sind.
-            Zusätzlich möchten wir mit deiner Zustimmung anonyme Nutzungsstatistiken erheben, um die
-            Website zu verbessern. Du kannst deine Entscheidung jederzeit in der{" "}
-            <Link
-              href="/datenschutz"
-              style={{
-                color: "#ff9800",
-                textDecoration: "underline",
-                textUnderlineOffset: 3,
-              }}
-            >
-              Datenschutzerklärung
-            </Link>{" "}
-            widerrufen.
-          </p>
-        </div>
-
-        {/* Buttons */}
-        <div
+      {/* Text */}
+      <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: 6 }}>
+        <p
           style={{
-            display: "flex",
-            gap: 12,
-            alignItems: "center",
-            flexShrink: 0,
-            flexWrap: "wrap",
+            margin: 0,
+            fontSize: 14.5,
+            fontWeight: 600,
+            color: "#fff",
+            letterSpacing: "0.1px",
           }}
         >
-          <button
-            onClick={reject}
+          Diese Website verwendet Cookies
+        </p>
+        <p
+          style={{
+            margin: 0,
+            fontSize: 13.5,
+            lineHeight: 1.6,
+            color: "rgba(255,255,255,0.55)",
+          }}
+        >
+          Wir nutzen Cookies zur Analyse und Verbesserung. Nicht-essentielle Cookies
+          werden nur mit deiner Zustimmung geladen.{" "}
+          <a
+            href="/datenschutz"
             style={{
-              padding: "12px 24px",
-              borderRadius: 100,
-              border: "1.5px solid rgba(255,255,255,0.25)",
-              background: "transparent",
-              color: "rgba(255,255,255,0.75)",
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: "pointer",
-              fontFamily: "inherit",
+              color: ACCENT,
+              textDecoration: "underline",
+              textDecorationColor: "rgba(255,152,0,0.35)",
+              textUnderlineOffset: 2,
               whiteSpace: "nowrap",
-              transition: "border-color 0.2s, color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-              e.currentTarget.style.color = "rgba(255,255,255,0.75)";
             }}
           >
-            Ablehnen
-          </button>
-          <button
-            onClick={accept}
-            style={{
-              padding: "12px 24px",
-              borderRadius: 100,
-              border: "none",
-              background: "#ff9800",
-              color: "#16212e",
-              fontSize: 14,
-              fontWeight: 700,
-              cursor: "pointer",
-              fontFamily: "inherit",
-              whiteSpace: "nowrap",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            Alle akzeptieren
-          </button>
-        </div>
+            Datenschutzerklärung
+          </a>
+        </p>
       </div>
 
-      {/* Mobile stacked layout */}
-      <style>{`
-        @media (max-width: 680px) {
-          [aria-label="Cookie-Einstellungen"] > div {
-            grid-template-columns: 1fr !important;
-          }
-          [aria-label="Cookie-Einstellungen"] > div > div:last-child {
-            justify-content: flex-start !important;
-          }
-        }
-      `}</style>
+      {/* Buttons */}
+      <div
+        className="cookie-banner-buttons"
+        style={{
+          display: "flex",
+          gap: 10,
+          flexShrink: 0,
+          flexWrap: "wrap",
+        }}
+      >
+        {/* Ablehnen — gleiche Größe wie Akzeptieren (DSGVO: gleichwertige Option) */}
+        <button
+          onClick={handleDecline}
+          style={{
+            padding: "10px 20px",
+            borderRadius: 100,
+            border: "1.5px solid rgba(255,255,255,0.22)",
+            background: "transparent",
+            color: "rgba(255,255,255,0.72)",
+            fontSize: 14,
+            fontWeight: 500,
+            cursor: "pointer",
+            fontFamily: "inherit",
+            whiteSpace: "nowrap",
+          }}
+          onMouseEnter={(e) => {
+            const btn = e.currentTarget;
+            btn.style.borderColor = "rgba(255,255,255,0.5)";
+            btn.style.color = "#fff";
+          }}
+          onMouseLeave={(e) => {
+            const btn = e.currentTarget;
+            btn.style.borderColor = "rgba(255,255,255,0.22)";
+            btn.style.color = "rgba(255,255,255,0.72)";
+          }}
+        >
+          Ablehnen
+        </button>
+
+        {/* Akzeptieren */}
+        <button
+          onClick={handleAccept}
+          style={{
+            padding: "10px 20px",
+            borderRadius: 100,
+            border: "none",
+            background: ACCENT,
+            color: "#16212e",
+            fontSize: 14,
+            fontWeight: 700,
+            cursor: "pointer",
+            fontFamily: "inherit",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Akzeptieren
+        </button>
+      </div>
     </div>
   );
 }

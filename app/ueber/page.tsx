@@ -9,7 +9,7 @@ import { ScrollAnimations } from "@/components/ScrollAnimations";
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";
-const SITE_URL = "https://steffenschuster.de";
+const SITE_URL = "https://www.steffenschuster.de";
 
 export const metadata: Metadata = {
   title: "Über Steffen Schuster — Pädagoge, KI-Pionier & Gründer aus Hamburg",
@@ -34,9 +34,8 @@ const personSchema = {
   name: "Steffen Schuster",
   url: SITE_URL,
   sameAs: [
-    "https://www.linkedin.com/in/steffen-schuster-7297088b/",
     "https://nora-ki.de",
-    "https://www.wikidata.org/wiki/Q140520910",
+    "https://www.linkedin.com/in/steffenschuster",
   ],
   jobTitle: "Pädagoge, KI-Pionier & Gründer",
   description:
@@ -256,6 +255,7 @@ export default function UeberPage() {
       {/* ── HERO ── */}
       <section
         id="hero"
+        className="ueber-hero-section"
         style={{
           background: DARK_BG,
           minHeight: "100svh",
@@ -335,7 +335,7 @@ export default function UeberPage() {
               Lerncoach tut — individuell, geduldig, immer verfügbar.
             </p>
             {/* Stats */}
-            <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
+            <div className="ueber-hero-stats" style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
               {stats.map((s) => (
                 <div key={s.label}>
                   <div
@@ -433,6 +433,7 @@ export default function UeberPage() {
       <section
         id="bio"
         data-light-section
+        className="section-px"
         style={{
           background: "var(--section-alt-bg)",
           padding: "100px 40px",
@@ -830,6 +831,7 @@ export default function UeberPage() {
       {/* ── EXPERTISE ── */}
       <section
         id="expertise"
+        className="section-px"
         style={{
           background: "var(--page-bg)",
           padding: "100px 40px",
@@ -920,6 +922,7 @@ export default function UeberPage() {
       {/* ── PROJEKTE ── */}
       <section
         id="projekte"
+        className="section-px"
         style={{ background: DARK_BG, padding: "100px 40px" }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -954,7 +957,7 @@ export default function UeberPage() {
               <TiltCard key={p.name}>
                 <div
                   data-reveal
-                  className="grid-project-card"
+                  className="project-row-grid"
                   style={{
                     background: "rgba(255,255,255,0.04)",
                     border: "1px solid rgba(255,255,255,0.08)",
@@ -1017,6 +1020,7 @@ export default function UeberPage() {
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="project-row-cta"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
@@ -1045,6 +1049,7 @@ export default function UeberPage() {
       <section
         id="auszeichnungen"
         data-light-section
+        className="section-px"
         style={{
           background: "var(--section-alt-bg)",
           padding: "100px 40px",
@@ -1140,12 +1145,13 @@ export default function UeberPage() {
       <section
         id="medien"
         data-light-section
+        className="section-px"
         style={{ background: "var(--page-bg)", padding: "100px 40px" }}
       >
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div
             data-reveal
-            className="medien-grid"
+            className="grid-2"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
@@ -1222,6 +1228,7 @@ export default function UeberPage() {
             </div>
             {/* ── CHANGE #5: data-reveal + TiltCard on each stat card, 42.000+ ── */}
             <div
+              className="media-stats-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
@@ -1278,6 +1285,7 @@ export default function UeberPage() {
       <section
         id="faq"
         data-light-section
+        className="section-px"
         style={{
           background: "var(--section-alt-bg)",
           padding: "100px 40px",
@@ -1367,6 +1375,7 @@ export default function UeberPage() {
       {/* ── CTA ── */}
       <section
         id="cta"
+        className="section-px"
         style={{
           background: DARK_BG,
           padding: "120px 40px",
@@ -1487,6 +1496,7 @@ export default function UeberPage() {
             {[
               { label: "Startseite", href: "/" },
               { label: "Über mich", href: "/ueber" },
+              { label: "Bücher", href: "/autor" },
               { label: "nora-ki.de", href: "https://nora-ki.de" },
               { label: "educube.de", href: "https://www.educube.de/" },
               { label: "Kontakt", href: "/kontakt" },

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { MainChrome } from "@/components/MainChrome";
+import { Footer } from "@/components/Footer";
+import { CookieBanner } from "@/components/CookieBanner";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const SITE_URL = "https://steffenschuster.de";
+const SITE_URL = "https://www.steffenschuster.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -98,7 +99,8 @@ export default function RootLayout({
       />
       <body style={{ margin: 0, WebkitFontSmoothing: "antialiased" }}>
         {children}
-        <MainChrome />
+        <Footer />
+        <CookieBanner />
       </body>
     </html>
   );

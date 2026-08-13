@@ -1,43 +1,26 @@
-import { NextResponse } from "next/server";
-import crypto from "crypto";
+import { NextRequest, NextResponse } from "next/server";
+import { verifyCredentials, createSessionToken, COOKIE_NAME, COOKIE_MAX_AGE } from "@/lib/auth";
 
-function computeToken(): string {
-  const secret = process.env.SESSION_SECRET ?? "dev-fallback-secret";
-  return crypto
-    .createHmac("sha256", secret)
-    .update("admin:authenticated")
-    .digest("hex");
-}
+export async function POST(req: NextRequest) {
+  const { username, password } = await req.json();
 
-export async function POST(request: Request) {
-  const { username, password } = await request.json();
-
-  const expectedUser = process.env.ADMIN_USERNAME ?? "Steffen";
-  const expectedPass = process.env.ADMIN_PASSWORD;
-
-  if (!expectedPass) {
-    console.error("ADMIN_PASSWORD ist nicht als Umgebungsvariable gesetzt.");
+  if (!verifyCredentials(username, password)) {
     return NextResponse.json(
-      { error: "Server nicht konfiguriert. Bitte ADMIN_PASSWORD setzen." },
-      { status: 500 }
-    );
-  }
-
-  if (username !== expectedUser || password !== expectedPass) {
-    return NextResponse.json(
-      { error: "Ungültige Zugangsdaten." },
+      { error: "Benutzername oder Passwort falsch." },
       { status: 401 }
     );
   }
 
-  const token = computeToken();
+  const token = createSessionToken();
   const response = NextResponse.json({ ok: true });
-  response.cookies.set("admin-session", token, {
+
+  response.cookies.set(COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7, // 7 Tage
+    maxAge: COOKIE_MAX_AGE,
     path: "/",
   });
+
   return response;
 }

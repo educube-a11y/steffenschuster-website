@@ -28,7 +28,6 @@
 }
 
 /* ── Dark mode: light-section text overrides ── */
-/* Inline styles cannot be cascaded; !important is the correct tool here. */
 [data-theme="dark"] [data-light-section] h2,
 [data-theme="dark"] [data-light-section] h3 {
   color: var(--text-primary) !important;
@@ -87,7 +86,6 @@
   50% { transform: translateY(-8px); }
 }
 
-/* Tilt handled by TiltCard (framer-motion); CSS hover removed to avoid conflict */
 .offer-card {
   box-shadow: 0 2px 14px rgba(20, 40, 60, 0.04);
   transition: box-shadow 0.35s ease;
@@ -96,171 +94,234 @@
   box-shadow: 0 18px 44px rgba(20, 40, 60, 0.11);
 }
 
-/* Custom cursor: hide native cursor globally when active */
+/* Custom cursor */
 html.has-custom-cursor,
 html.has-custom-cursor * {
   cursor: none !important;
 }
 
-/* ── Mobile optimization ── */
-@media (max-width: 768px) {
 
-  /* ─ Section padding ─ */
-  .site-section,
-  section {
+/* ═══════════════════════════════════════
+   RESPONSIVE / MOBILE
+   Breakpoint: ≤ 767px
+═══════════════════════════════════════ */
+
+/* Nav: Desktop always visible, Mobile hidden by default */
+.nav-desktop-links { display: flex !important; }
+.nav-mobile-controls { display: none !important; }
+
+@media (max-width: 767px) {
+
+  /* ── Nav ── */
+  .site-nav {
+    padding: 14px 20px !important;
+  }
+  .nav-desktop-links {
+    display: none !important;
+  }
+  .nav-mobile-controls {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ── Section horizontal padding ── */
+  .section-px {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
-  /* Reduce vertical padding too for tall sections */
-  section#hero,
-  section[id="hero"] {
-    padding-top: 100px !important;
-    padding-bottom: 60px !important;
-  }
-  section#nora, section#philosophie, section#meilensteine,
-  section#auszeichnungen, section#angebot, section#referenzen,
-  section#kontakt, section#bio, section#faktenkasten,
-  section#expertise, section#projekte, section#medien,
-  section#faq, section#cta {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
+
+  /* ── Hero sections ── */
+  .hero-section {
+    padding: 116px 20px 72px !important;
+    min-height: auto !important;
   }
 
-  /* ─ Collapse 2-column grids to 1 column ─ */
-  .grid-2col {
+  /* ── Hero badge ── */
+  .hero-badge-text {
+    font-size: 11px !important;
+    letter-spacing: 0.6px !important;
+  }
+
+  /* ── Hero CTA: Stack buttons vertically ── */
+  .hero-cta-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .hero-cta-group > a {
+    justify-content: center !important;
+    text-align: center;
+  }
+
+  /* ── Nora stats row ── */
+  .nora-stats {
+    gap: 24px !important;
+    margin-bottom: 32px !important;
+  }
+
+  /* ── 2-column grids → single column ── */
+  .grid-2 {
     grid-template-columns: 1fr !important;
     gap: 40px !important;
   }
+  /* Reverse order: portrait/image before text on mobile */
+  .grid-2-img-first > *:first-child {
+    order: 2;
+  }
+  .grid-2-img-first > *:last-child {
+    order: 1;
+  }
 
-  /* ─ Milestone 4-col → 1-col on mobile ─ */
-  [data-milestone-grid] {
-    grid-template-columns: 1fr !important;
+  /* ── 4-column milestone grid → horizontal scroll ── */
+  .milestone-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    gap: 12px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    padding: 4px 20px 20px !important;
+    scrollbar-width: none;
+    margin-bottom: 50px !important;
+  }
+  .milestone-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .milestone-card {
+    min-width: 280px !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start;
+  }
+
+  /* ── Philosophie portrait: shorter aspect ratio ── */
+  .philosophie-portrait {
+    aspect-ratio: 3/2 !important;
+  }
+
+  /* ── Award panorama image ── */
+  .award-panorama {
+    aspect-ratio: 4/3 !important;
+  }
+  .award-panorama-overlay {
+    padding: 24px 20px !important;
+  }
+
+  /* ── CTA section button group ── */
+  .cta-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
     gap: 12px !important;
   }
-
-  /* ─ Project cards: stack year / text / CTA ─ */
-  .grid-project-card {
-    grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    padding: 28px 24px !important;
+  .cta-group > a {
+    justify-content: center !important;
+    text-align: center;
   }
 
-  /* ─ Blog fixed-col grid ─ */
-  .grid-legal-row {
-    grid-template-columns: 1fr !important;
-    gap: 4px !important;
-  }
-  .grid-legal-label {
-    font-size: 11px !important;
-    padding-bottom: 2px !important;
-    opacity: 0.7;
+  /* ── Kontakt footer info bar ── */
+  .kontakt-footer-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    padding-top: 24px !important;
+    margin-top: 48px !important;
   }
 
-  /* ─ Hide decorative elements on mobile ─ */
-  .mobile-hide,
-  [data-parallax-portrait],
-  [data-parallax-classroom],
-  [data-parallax-award] {
-    display: none !important;
-  }
-
-  /* ─ Blog hero section ─ */
-  .blog-hero {
-    padding-top: 110px !important;
-    padding-bottom: 60px !important;
-  }
-
-  /* ─ Cookie banner ─ */
-  [aria-label="Cookie-Einstellungen"] {
-    padding: 20px !important;
-  }
-
-  /* ─ Ueber page hero: stack and hide portrait ─ */
-  .ueber-hero-portrait {
-    display: none !important;
+  /* ── Über mich Hero: einspaltig, Portrait ausgeblendet ── */
+  .ueber-hero-section {
+    padding: 116px 20px 64px !important;
+    min-height: auto !important;
+    align-items: flex-start !important;
   }
   .ueber-hero-grid {
     grid-template-columns: 1fr !important;
-    gap: 32px !important;
+    gap: 0 !important;
   }
-
-  /* ─ Stats row: wrap nicely ─ */
-  .stats-row {
-    gap: 24px !important;
-  }
-
-  /* ─ Footer ─ */
-  footer {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
-
-  /* ─ Nora-KI mock-browser: hide on mobile ─ */
-  .nora-mockbrowser {
+  .ueber-hero-portrait {
     display: none !important;
   }
-  /* Nora section: single column text */
-  .nora-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
+  .ueber-hero-stats {
+    gap: 20px !important;
+    flex-wrap: wrap;
+  }
+  .ueber-stat-value {
+    font-size: 28px !important;
   }
 
-  /* ─ Auszeichnungen: hide photo, show awards list ─ */
-  .auszeichnungen-photo {
-    display: none !important;
-  }
-  .auszeichnungen-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-
-  /* ─ Referenzen: stack ─ */
-  .referenzen-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-
-  /* ─ Angebot: 2x2 → 1-col ─ */
-  .angebot-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* ─ Philosophie grid: portrait goes first, hidden on mobile ─ */
-  .philosophie-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-
-  /* ─ Kiss-U / classroom grid ─ */
-  .kissu-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-
-  /* ─ Ueber bio grid ─ */
+  /* ── Bio-Sektion: Sidebar ausblenden ── */
   .bio-grid {
     grid-template-columns: 1fr !important;
-    gap: 40px !important;
+    gap: 32px !important;
   }
   .bio-sidebar {
     display: none !important;
   }
 
-  /* ─ Medien grid ─ */
-  .medien-grid {
+  /* ── Projekte: 3-spaltiges Grid → einspaltig ── */
+  .project-row-grid {
     grid-template-columns: 1fr !important;
-    gap: 48px !important;
+    gap: 12px !important;
+    padding: 24px 20px !important;
+  }
+  .project-row-cta {
+    width: 100% !important;
+    justify-content: center !important;
+    margin-top: 4px;
+  }
+  .project-year-big {
+    font-size: 32px !important;
   }
 
-  /* ─ Hero CTA buttons: stack ─ */
-  .hero-cta-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
+  /* ── Media stats grid: 2x2 statt 1x4 ── */
+  .media-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
     gap: 12px !important;
   }
-  .hero-cta-row a {
-    width: 100%;
-    justify-content: center !important;
+
+  /* ── Footer ── */
+  .site-footer {
+    padding: 20px 20px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .site-footer-links {
+    gap: 20px !important;
+  }
+
+  /* ── Cookie Banner: Buttons untereinander auf kleinen Screens ── */
+  .cookie-banner-inner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+  }
+  .cookie-banner-buttons {
+    display: flex !important;
+    gap: 10px !important;
+  }
+  .cookie-banner-buttons button {
+    flex: 1 !important;
+  }
+
+  /* ── Allgemeine Abstände für Sektionen ── */
+  .section-py-large {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+  .section-py-xl {
+    padding-top: 100px !important;
+    padding-bottom: 100px !important;
+  }
+
+  /* ── Offer cards ── */
+  .offer-card {
+    padding: 28px 22px !important;
+  }
+
+  /* ── Ref card content ── */
+  .ref-card-content {
+    padding: 22px !important;
+    flex-direction: column !important;
+    gap: 12px !important;
   }
 }
-

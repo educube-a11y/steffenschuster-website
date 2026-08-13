@@ -8,7 +8,7 @@ import { KontaktForm } from "./KontaktForm";
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";
-const SITE_URL = "https://steffenschuster.de";
+const SITE_URL = "https://www.steffenschuster.de";
 
 export const metadata: Metadata = {
   title: "Kontakt — Steffen Schuster",
@@ -27,6 +27,7 @@ export default function KontaktPage() {
 
       {/* ── HERO ── */}
       <section
+        className="hero-section section-px"
         style={{
           background: DARK_BG,
           padding: "160px 40px 100px",
@@ -91,6 +92,7 @@ export default function KontaktPage() {
       <section
         id="formular"
         data-light-section
+        className="section-px"
         style={{
           background: "var(--section-alt-bg)",
           padding: "100px 40px 120px",

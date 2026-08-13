@@ -1,136 +1,204 @@
-import fs from "fs";
-import path from "path";
-import Link from "next/link";
-import matter from "gray-matter";
+"use client";
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
-
-function getArticles() {
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
-  return files.map((file) => {
-    const slug = file.replace(/\.mdx$/, "");
-    const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8");
-    const { data } = matter(raw);
-    return {
-      slug,
-      title: (data.title as string) ?? slug,
-      date: (data.date as string) ?? null,
-    };
-  }).sort((a, b) => (a.date && b.date ? b.date.localeCompare(a.date) : 0));
-}
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { LogoMark } from "@/components/LogoMark";
 
 const ACCENT = "#ff9800";
-const CARD_BG = "rgba(255,255,255,0.04)";
-const BORDER = "rgba(255,255,255,0.08)";
 
-export default function AdminDashboard() {
-  const articles = getArticles();
+export default function AdminLoginPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError]       = useState("");
+  const [loading, setLoading]   = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const res = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (res.ok) {
+      router.push("/admin/dashboard");
+    } else {
+      const data = await res.json();
+      setError(data.error ?? "Anmeldung fehlgeschlagen.");
+      setLoading(false);
+    }
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "13px 16px",
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    borderRadius: 10,
+    color: "#fff",
+    fontSize: 15,
+    outline: "none",
+    fontFamily: "inherit",
+    boxSizing: "border-box",
+    transition: "border-color 0.2s",
+  };
 
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto", padding: "60px 24px" }}>
-      {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 48 }}>
-        <div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 28,
-              fontWeight: 700,
-              color: "#fff",
-            }}
-          >
-            Blog-Artikel
-          </h1>
-          <p style={{ margin: "6px 0 0", color: "rgba(255,255,255,0.4)", fontSize: 14 }}>
-            {articles.length} Artikel · zum Bearbeiten klicken
-          </p>
+    <div
+      style={{
+        minHeight: "100svh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#080f17",
+        padding: "24px",
+        fontFamily: "var(--font-dm-sans), -apple-system, sans-serif",
+      }}
+    >
+      <div style={{ width: "100%", maxWidth: 380 }}>
+        {/* Logo */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 40 }}>
+          <LogoMark size={44} />
         </div>
-        <LogoutButton />
-      </div>
 
-      {/* Artikel-Liste */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {articles.map((a) => (
-          <Link
-            key={a.slug}
-            href={`/admin/blog/${a.slug}`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "20px 24px",
-              background: CARD_BG,
-              border: `1px solid ${BORDER}`,
-              borderRadius: 12,
-              textDecoration: "none",
-              transition: "border-color 0.2s, background 0.2s",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  fontSize: 16,
-                  fontWeight: 600,
-                  color: "#fff",
-                  marginBottom: 4,
-                }}
-              >
-                {a.title}
-              </div>
-              {a.date && (
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.35)" }}>
-                  {a.date}
-                </div>
-              )}
-            </div>
-            <span
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: 13,
+            fontFamily: "var(--font-jetbrains), monospace",
+            letterSpacing: "0.15em",
+            color: ACCENT,
+            textTransform: "uppercase",
+            marginBottom: 10,
+          }}
+        >
+          Admin
+        </p>
+        <h1
+          style={{
+            fontFamily: "var(--font-cormorant), serif",
+            fontSize: 32,
+            fontWeight: 500,
+            color: "#fff",
+            textAlign: "center",
+            margin: "0 0 36px",
+          }}
+        >
+          Anmelden
+        </h1>
+
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", gap: 16 }}
+        >
+          <div>
+            <label
+              htmlFor="username"
               style={{
-                fontSize: 13,
+                display: "block",
+                fontSize: 12,
                 fontWeight: 600,
-                color: ACCENT,
-                flexShrink: 0,
-                marginLeft: 16,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+                marginBottom: 8,
               }}
             >
-              Bearbeiten →
-            </span>
-          </Link>
-        ))}
-      </div>
+              Benutzername
+            </label>
+            <input
+              id="username"
+              type="text"
+              autoComplete="username"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              style={inputStyle}
+              onFocus={(e) => (e.target.style.borderColor = ACCENT)}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
+            />
+          </div>
 
-      {/* Link zur Website */}
-      <div style={{ marginTop: 48, textAlign: "center" }}>
-        <Link
-          href="/blog"
-          style={{ fontSize: 13, color: "rgba(255,255,255,0.25)", textDecoration: "none" }}
-          target="_blank"
+          <div>
+            <label
+              htmlFor="password"
+              style={{
+                display: "block",
+                fontSize: 12,
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.45)",
+                marginBottom: 8,
+              }}
+            >
+              Passwort
+            </label>
+            <input
+              id="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={inputStyle}
+              onFocus={(e) => (e.target.style.borderColor = ACCENT)}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
+            />
+          </div>
+
+          {error && (
+            <p
+              style={{
+                fontSize: 14,
+                color: "#f56565",
+                background: "rgba(245,101,101,0.1)",
+                border: "1px solid rgba(245,101,101,0.2)",
+                borderRadius: 8,
+                padding: "10px 14px",
+                margin: 0,
+              }}
+            >
+              {error}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              marginTop: 8,
+              padding: "14px",
+              borderRadius: 100,
+              border: "none",
+              background: loading ? "rgba(255,152,0,0.5)" : ACCENT,
+              color: "#16212e",
+              fontSize: 15,
+              fontWeight: 700,
+              cursor: loading ? "not-allowed" : "pointer",
+              fontFamily: "inherit",
+              transition: "background 0.2s",
+            }}
+          >
+            {loading ? "Anmelden…" : "Anmelden →"}
+          </button>
+        </form>
+
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: 40,
+            fontSize: 12,
+            color: "rgba(255,255,255,0.18)",
+          }}
         >
-          ← zur Website
-        </Link>
+          Diese Seite ist nicht öffentlich zugänglich.
+        </p>
       </div>
     </div>
-  );
-}
-
-function LogoutButton() {
-  return (
-    <form action="/api/admin/logout" method="POST">
-      <button
-        type="submit"
-        style={{
-          padding: "9px 18px",
-          borderRadius: 100,
-          background: "rgba(255,255,255,0.07)",
-          border: "1px solid rgba(255,255,255,0.12)",
-          color: "rgba(255,255,255,0.7)",
-          fontSize: 13,
-          fontWeight: 600,
-          cursor: "pointer",
-          fontFamily: "inherit",
-        }}
-      >
-        Abmelden
-      </button>
-    </form>
   );
 }
