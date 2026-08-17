@@ -50,9 +50,24 @@ const AMAZON = {
   band1: "https://www.amazon.de/dp/B0HDHZQ596",
   band2: "https://www.amazon.de/dp/B0HDLDNLXD",
   band3: "https://www.amazon.de/dp/B0HDNTP6TP",
+  band4: "https://www.amazon.de/dp/B0HFK7Y5FH",
 };
 
-const baende = [
+type BandStatus = "erhaeltlich" | "in_vorbereitung" | "geplant";
+
+type Band = {
+  nr: number;
+  alter: number;
+  titel: string;
+  untertitel: string;
+  teaser: string;
+  kaufimpuls: string;
+  cover: string;
+  status: BandStatus;
+  link: string | null;
+};
+
+const baende: Band[] = [
   {
     nr: 1,
     alter: 5,
@@ -62,7 +77,7 @@ const baende = [
       "Als Claras Papa Kartons packt, möchte Clara nur eines: Alles soll wieder so werden wie früher. Ihr geheimer Plan mit zwei Stühlen führt zu einem wichtigen ersten Schritt — und zu der Erkenntnis, dass sie beide Eltern lieben darf, ohne ihre Beziehung reparieren zu müssen.",
     kaufimpuls: "Ein warmherziger Einstieg in die Reihe für Kinder, die sich zwischen zwei Zuhause wiederfinden.",
     cover: "/buecher/clara-und-aeffchen/covers/cover-band-1.jpg",
-    status: "erhaeltlich" as const,
+    status: "erhaeltlich",
     link: AMAZON.band1,
   },
   {
@@ -74,7 +89,7 @@ const baende = [
       "Schultüte, neuer Ranzen und Grete auf dem Schulhof: Clara freut sich auf ihren großen Tag. Doch Mama und Papa sitzen weit auseinander. Mit Äffchen, Grete und Tante Carina findet Clara einen eigenen Rhythmus zwischen zwei Kalendern.",
     kaufimpuls: "Für Familien, die Einschulung und Trennung gemeinsam, kindgerecht und ohne Schuldzuweisungen besprechen möchten.",
     cover: "/buecher/clara-und-aeffchen/covers/cover-band-2.jpg",
-    status: "erhaeltlich" as const,
+    status: "erhaeltlich",
     link: AMAZON.band2,
   },
   {
@@ -86,20 +101,20 @@ const baende = [
       "Im Kalender fehlt plötzlich der Samstagstern. Clara vermisst Papa und möchte Mama nicht enttäuschen. In der Schule findet sie bei Grete und Frau Grün Worte für das, was passiert — und entdeckt, dass Hilfeholen kein Petzen ist.",
     kaufimpuls: "Eine stärkende Geschichte für Kinder, die mit ausgefallenen Besuchen, Vermissen und Loyalitätsdruck umgehen müssen.",
     cover: "/buecher/clara-und-aeffchen/covers/cover-band-3.jpg",
-    status: "erhaeltlich" as const,
+    status: "erhaeltlich",
     link: AMAZON.band3,
   },
   {
     nr: 4,
     alter: 8,
     titel: "Clara und die zwei Wochen",
-    untertitel: "Wenn aus zwei Kalendern ein neuer Alltag wird",
+    untertitel: "Wenn ein neuer Alltag beginnt",
     teaser:
       "Clara probiert eine ganze Woche bei Mama und eine ganze Woche bei Papa. Dann kommt Sven in Petras Leben. Clara fasst Vertrauen, erlebt einen Abschied und lernt: Eine Beziehung kann echt gewesen sein, auch wenn sie endet.",
     kaufimpuls: "Der wichtige Band über Wochenwechsel, neue Partner, Vertrauen und Abschied.",
-    cover: "/buecher/clara-und-aeffchen/covers/cover-band-4-vorschau.jpg",
-    status: "in_vorbereitung" as const,
-    link: null,
+    cover: "/buecher/clara-und-aeffchen/covers/cover-band-4.jpg",
+    status: "erhaeltlich",
+    link: AMAZON.band4,
   },
 ];
 
@@ -129,11 +144,11 @@ const faqItems = [
   },
   {
     q: "Wie viele Bände wird es geben?",
-    a: "Clara & Äffchen ist auf 14 Bände angelegt und begleitet Clara von der Kita bis zum Abitur und dem Auszug mit 18 Jahren. Aktuell sind die Bände 1 bis 3 erhältlich, Band 4 ist in Vorbereitung.",
+    a: "Clara & Äffchen ist auf 14 Bände angelegt und begleitet Clara von der Kita bis zum Abitur und dem Auszug mit 18 Jahren. Aktuell sind die Bände 1 bis 4 erhältlich.",
   },
   {
-    q: "Ist Band 4 schon erhältlich?",
-    a: "Band 4, „Clara und die zwei Wochen“, liegt bereits als fertiges Manuskript mit Innensatz-Proof vor. Das Cover befindet sich noch in Vorbereitung, die Veröffentlichung wird auf dieser Seite angekündigt.",
+    q: "Wann erscheint Band 5?",
+    a: "Ein Erscheinungstermin für Band 5 steht noch nicht fest. Sobald ein neuer Band angekündigt ist, wird diese Seite aktualisiert.",
   },
   {
     q: "Wo kann ich Clara & Äffchen kaufen?",
@@ -429,8 +444,8 @@ export default function ClaraUndAeffchenPage() {
 
           <div data-reveal style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {Array.from({ length: 14 }, (_, i) => i + 1).map((nr) => {
-              const status = nr <= 3 ? "erhaeltlich" : nr === 4 ? "in_vorbereitung" : "geplant";
-              const bg = status === "erhaeltlich" ? WARM : status === "in_vorbereitung" ? "rgba(199,107,66,0.35)" : "rgba(255,255,255,0.07)";
+              const status = nr <= 4 ? "erhaeltlich" : "geplant";
+              const bg = status === "erhaeltlich" ? WARM : "rgba(255,255,255,0.07)";
               const color = status === "geplant" ? "rgba(255,255,255,0.4)" : "#fff";
               return (
                 <div
@@ -460,9 +475,6 @@ export default function ClaraUndAeffchenPage() {
           <div data-reveal style={{ display: "flex", gap: 22, flexWrap: "wrap", marginTop: 22, fontSize: 13, color: "rgba(255,255,255,0.6)" }}>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
               <span style={{ width: 10, height: 10, borderRadius: 3, background: WARM, display: "inline-block" }} /> erhältlich
-            </span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
-              <span style={{ width: 10, height: 10, borderRadius: 3, background: "rgba(199,107,66,0.35)", display: "inline-block" }} /> in Vorbereitung
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
               <span style={{ width: 10, height: 10, borderRadius: 3, border: "1px dashed rgba(255,255,255,0.3)", display: "inline-block" }} /> geplant
@@ -826,7 +838,8 @@ export default function ClaraUndAeffchenPage() {
             {[
               { label: "Startseite", href: "/" },
               { label: "Autor", href: "/autor" },
-              { label: "Über mich", href: "/ueber" },
+              { label: "Iridologie", href: "/buecher/iridologie" },
+              { label: "Friedas Abenteuer", href: "/buecher/frieda-malbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>

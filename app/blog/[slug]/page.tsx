@@ -13,6 +13,7 @@ import "../blog.css";
 export const dynamic = "force-dynamic";
 
 
+
 const ACCENT = "#ff9800";
 const PRIMARY = "#345f85";
 const DARK_BG = "#0f1f2e";

@@ -10,28 +10,30 @@ const INK = "#244f59";
 const WARM = "#c76b42";
 const PAPER = "#fffaf0";
 const SOFT = "#eaf3f5";
+const GOLD = "#b68d40";
+const IRIS_INK = "#2f4538";
 const SITE_URL = "https://www.steffenschuster.de";
 
 export const metadata: Metadata = {
-  title: "Steffen Schuster als Kinderbuchautor — Autor von Clara & Äffchen",
+  title: "Steffen Schuster als Autor — Clara & Äffchen, Iridologie & mehr",
   description:
-    "Steffen Schuster verbindet Pädagogik, Anthroposophie und jahrzehntelange Erfahrung mit kindlicher Entwicklung in seiner Kinderbuchreihe Clara & Äffchen. Erhältlich bei Amazon.",
+    "Steffen Schuster verbindet Pädagogik, Anthroposophie und jahrzehntelange Erfahrung mit kindlicher Entwicklung in seinen Büchern — von der Kinderbuchreihe Clara & Äffchen bis zum Fachbuch Iridologie. Erhältlich bei Amazon.",
   alternates: { canonical: `${SITE_URL}/autor` },
   openGraph: {
     type: "profile",
     locale: "de_DE",
     url: `${SITE_URL}/autor`,
     siteName: "Steffen Schuster",
-    title: "Steffen Schuster als Kinderbuchautor — Autor von Clara & Äffchen",
+    title: "Steffen Schuster als Autor — Clara & Äffchen, Iridologie & mehr",
     description:
-      "Ein vielfältiges Leben zwischen Technik, Anthroposophie und kindlicher Entwicklung — im Zentrum steht das Lernen in all seiner Umfänglichkeit. Autor der Reihe Clara & Äffchen.",
+      "Ein vielfältiges Leben zwischen Technik, Anthroposophie und kindlicher Entwicklung — im Zentrum steht das Lernen in all seiner Umfänglichkeit. Autor und Co-Autor mehrerer Bücher.",
     images: [{ url: "/autor/og-steffen-schuster-autor.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Steffen Schuster als Kinderbuchautor — Autor von Clara & Äffchen",
+    title: "Steffen Schuster als Autor — Clara & Äffchen, Iridologie & mehr",
     description:
-      "Autor der Kinderbuchreihe Clara & Äffchen — geprägt von Pädagogik, Anthroposophie und dem Lernen als rotem Faden.",
+      "Autor der Kinderbuchreihe Clara & Äffchen und Co-Autor des Fachbuchs Iridologie — geprägt von Pädagogik, Anthroposophie und dem Lernen als rotem Faden.",
     images: ["/autor/og-steffen-schuster-autor.jpg"],
   },
 };
@@ -43,25 +45,38 @@ const personSchema = {
   url: `${SITE_URL}/autor`,
   image: `${SITE_URL}/autor/steffen-schuster-autorenfoto.jpg`,
   sameAs: [SITE_URL, `${SITE_URL}/ueber`],
-  jobTitle: ["Kinderbuchautor", "Pädagoge"],
+  jobTitle: ["Autor", "Kinderbuchautor", "Pädagoge"],
   description:
-    "Steffen Schuster ist Kinderbuchautor und Pädagoge. Mit der Reihe Clara & Äffchen verbindet er kindnahe Erzählkunst mit langjähriger Beschäftigung mit kindlicher Entwicklung und Anthroposophie.",
+    "Steffen Schuster ist Autor und Pädagoge. Mit der Reihe Clara & Äffchen verbindet er kindnahe Erzählkunst mit langjähriger Beschäftigung mit kindlicher Entwicklung und Anthroposophie; als Co-Autor wirkte er zudem am Fachbuch Iridologie – Interpretation der Zeichen des Auges mit.",
   knowsAbout: [
     "Kindliche Entwicklung",
     "Anthroposophie",
     "Pädagogik",
     "Lernen und Persönlichkeitsentwicklung",
     "Familienthemen in der Kinderliteratur",
+    "Iridologie",
   ],
   hasOccupation: [
-    { "@type": "Occupation", name: "Kinderbuchautor" },
+    { "@type": "Occupation", name: "Autor" },
     { "@type": "Occupation", name: "Pädagoge" },
   ],
-  author: {
-    "@type": "CreativeWorkSeries",
-    name: "Clara & Äffchen",
-    url: `${SITE_URL}/buecher/clara-und-aeffchen`,
-  },
+  author: [
+    {
+      "@type": "CreativeWorkSeries",
+      name: "Clara & Äffchen",
+      url: `${SITE_URL}/buecher/clara-und-aeffchen`,
+    },
+    {
+      "@type": "Book",
+      name: "Iridologie – Interpretation der Zeichen des Auges",
+      url: `${SITE_URL}/buecher/iridologie`,
+    },
+    {
+      "@type": "Book",
+      name: "Friedas fröhliches Abenteuer in der Zahnarztpraxis",
+      url: `${SITE_URL}/buecher/frieda-malbuch`,
+    },
+  ],
 };
 
 const faqSchema = {
@@ -98,6 +113,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Roter Faden seines gesamten Schaffens ist das Lernen in all seiner Umfänglichkeit — als Pädagoge, als Gestalter digitaler Lernwelten und als Autor. In Clara & Äffchen verbindet er diesen Blick mit langjähriger Beschäftigung mit kindlicher Entwicklung, äußeren Einflüssen auf das Aufwachsen von Kindern und Therapieansätzen unterschiedlicher Kulturen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "An welchen weiteren Büchern hat Steffen Schuster mitgewirkt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Als Co-Autor wirkte Steffen Schuster gemeinsam mit Vistara Haiduk-Kaplan am Fachbuch „Iridologie – Interpretation der Zeichen des Auges“ mit. Außerdem schrieb er das Malbuch „Friedas fröhliches Abenteuer in der Zahnarztpraxis“, den ersten Band der Frieda-Malbuchserie, die Kinder spielerisch in verschiedene Berufswelten einführt.",
       },
     },
   ],
@@ -376,27 +399,28 @@ export default function AutorPage() {
                 color: INK,
               }}
             >
-              Clara &amp; Äffchen — die erste Buchreihe von Steffen Schuster.
+              Bücher von Steffen Schuster.
             </h2>
           </div>
 
-          <TiltCard>
-            <div
-              data-reveal
-              style={{
-                display: "grid",
-                gridTemplateColumns: "260px 1fr",
-                gap: 44,
-                alignItems: "center",
-                background: "#fff",
-                borderRadius: 22,
-                border: "1px solid #e2d9c8",
-                padding: "40px 44px",
-                boxShadow: "0 20px 50px rgba(36,79,89,0.08)",
-              }}
-              className="werk-card-grid"
-            >
-              <div style={{ display: "flex", gap: -20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(440px, 1fr))", gap: 28 }}>
+            {/* Clara & Äffchen */}
+            <TiltCard>
+              <div
+                data-reveal
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "180px 1fr",
+                  gap: 32,
+                  alignItems: "center",
+                  background: "#fff",
+                  borderRadius: 22,
+                  border: "1px solid #e2d9c8",
+                  padding: "36px 36px",
+                  height: "100%",
+                }}
+                className="werk-card-grid"
+              >
                 <div style={{ position: "relative", width: "100%", aspectRatio: "3/4" }}>
                   <div
                     style={{
@@ -412,8 +436,8 @@ export default function AutorPage() {
                     <Image
                       src="/buecher/clara-und-aeffchen/covers/cover-band-1.jpg"
                       alt="Cover Band 1: Der Plan mit den zwei Stühlen"
-                      width={260}
-                      height={416}
+                      width={200}
+                      height={320}
                       style={{ width: "100%", height: "auto", display: "block" }}
                     />
                   </div>
@@ -429,70 +453,136 @@ export default function AutorPage() {
                     }}
                   >
                     <Image
-                      src="/buecher/clara-und-aeffchen/covers/cover-band-3.jpg"
-                      alt="Cover Band 3: Clara und der leere Kalender"
-                      width={260}
-                      height={416}
+                      src="/buecher/clara-und-aeffchen/covers/cover-band-4.jpg"
+                      alt="Cover Band 4: Clara und die zwei Wochen"
+                      width={200}
+                      height={320}
                       style={{ width: "100%", height: "auto", display: "block" }}
                     />
                   </div>
                 </div>
-              </div>
-              <div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-cormorant), serif",
-                    fontSize: 30,
-                    fontWeight: 600,
-                    margin: "0 0 12px",
-                    color: INK,
-                  }}
-                >
-                  Clara &amp; Äffchen
-                </h3>
-                <p style={{ fontSize: 15.5, lineHeight: 1.7, color: "#4a5a5d", margin: "0 0 20px" }}>
-                  Zwei Zuhause, viele Gefühle, ein eigener Weg: Clara wächst
-                  zwischen zwei Elternhäusern auf — begleitet von Äffchen, der
-                  Stimme ihrer Gedanken. Eine auf 14 Bände angelegte Reihe, die
-                  Clara vom fünften bis zum 18. Lebensjahr begleitet.
-                </p>
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
-                  {["4 von 14 Bänden", "Ab 5 Jahren", "Nur bei Amazon"].map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        padding: "7px 14px",
-                        borderRadius: 100,
-                        border: `1px solid ${INK}33`,
-                        fontSize: 13,
-                        fontWeight: 500,
-                        color: INK,
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: WARM, margin: "0 0 8px" }}>
+                    Kinderbuchreihe
+                  </p>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 26, fontWeight: 600, margin: "0 0 10px", color: INK }}>
+                    Clara &amp; Äffchen
+                  </h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "#4a5a5d", margin: "0 0 18px" }}>
+                    Zwei Zuhause, viele Gefühle, ein eigener Weg: Clara wächst
+                    zwischen zwei Elternhäusern auf — begleitet von Äffchen, der
+                    Stimme ihrer Gedanken. Eine auf 14 Bände angelegte Reihe.
+                  </p>
+                  <a
+                    href="/buecher/clara-und-aeffchen"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14.5, fontWeight: 600, color: INK, textDecoration: "none", borderBottom: `1px solid ${WARM}`, paddingBottom: 2 }}
+                  >
+                    Zur Serie entdecken →
+                  </a>
                 </div>
-                <a
-                  href="/buecher/clara-und-aeffchen"
+              </div>
+            </TiltCard>
+
+            {/* Iridologie */}
+            <TiltCard>
+              <div
+                data-reveal
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "140px 1fr",
+                  gap: 32,
+                  alignItems: "center",
+                  background: "#fff",
+                  borderRadius: 22,
+                  border: "1px solid #e2d9c8",
+                  padding: "36px 36px",
+                  height: "100%",
+                }}
+                className="werk-card-grid"
+              >
+                <div
+                  aria-hidden
                   style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 10,
-                    padding: "13px 26px",
-                    borderRadius: 100,
-                    background: WARM,
-                    color: "#fff",
-                    textDecoration: "none",
-                    fontSize: 15,
-                    fontWeight: 600,
+                    position: "relative",
+                    width: "100%",
+                    aspectRatio: "1/1",
+                    borderRadius: "50%",
+                    background: `repeating-conic-gradient(from 0deg, ${GOLD}33 0deg 4deg, ${IRIS_INK}22 4deg 8deg)`,
+                    boxShadow: `inset 0 0 0 10px #fff, inset 0 0 0 12px ${GOLD}66, inset 0 0 0 34px #fff, inset 0 0 0 36px ${IRIS_INK}44`,
                   }}
                 >
-                  Zur Serie entdecken <span>→</span>
-                </a>
+                  <div style={{ position: "absolute", inset: "40%", borderRadius: "50%", background: IRIS_INK }} />
+                </div>
+                <div>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: GOLD, margin: "0 0 8px" }}>
+                    Fachbuch · Co-Autor
+                  </p>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 26, fontWeight: 600, margin: "0 0 10px", color: INK }}>
+                    Iridologie
+                  </h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "#4a5a5d", margin: "0 0 18px" }}>
+                    Gemeinsam mit Vistara Haiduk-Kaplan als Co-Autor entwickelt:
+                    ein Fachbuch über die Interpretation der Zeichen des Auges —
+                    Konstitutionstypen, Zeichen und Selbstbeobachtung.
+                  </p>
+                  <a
+                    href="/buecher/iridologie"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14.5, fontWeight: 600, color: INK, textDecoration: "none", borderBottom: `1px solid ${GOLD}`, paddingBottom: 2 }}
+                  >
+                    Zum Buch →
+                  </a>
+                </div>
               </div>
-            </div>
-          </TiltCard>
+            </TiltCard>
+
+            {/* Frieda-Malbuch */}
+            <TiltCard>
+              <div
+                data-reveal
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "140px 1fr",
+                  gap: 32,
+                  alignItems: "center",
+                  background: "#fff",
+                  borderRadius: 22,
+                  border: "1px solid #e2d9c8",
+                  padding: "36px 36px",
+                  height: "100%",
+                }}
+                className="werk-card-grid"
+              >
+                <div style={{ position: "relative", width: "100%", aspectRatio: "3/4", borderRadius: 10, overflow: "hidden", boxShadow: "0 14px 30px rgba(36,79,89,0.25)" }}>
+                  <Image
+                    src="/buecher/frieda-malbuch/cover.jpg"
+                    alt="Cover: Friedas fröhliches Abenteuer in der Zahnarztpraxis"
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#d6293f", margin: "0 0 8px" }}>
+                    Malbuch mit Geschichte
+                  </p>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 26, fontWeight: 600, margin: "0 0 10px", color: INK }}>
+                    Friedas Abenteuer
+                  </h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "#4a5a5d", margin: "0 0 18px" }}>
+                    Frieda besucht die Zahnarztpraxis und entdeckt mit
+                    Antonia, der Zahnmedizinischen Fachangestellten,
+                    spielerisch die Welt der Zahnpflege. Erster Band der
+                    Frieda-Malbuchserie.
+                  </p>
+                  <a
+                    href="/buecher/frieda-malbuch"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14.5, fontWeight: 600, color: INK, textDecoration: "none", borderBottom: "1px solid #d6293f", paddingBottom: 2 }}
+                  >
+                    Zum Buch →
+                  </a>
+                </div>
+              </div>
+            </TiltCard>
+          </div>
         </div>
       </section>
 
@@ -597,6 +687,8 @@ export default function AutorPage() {
               { label: "Startseite", href: "/" },
               { label: "Über mich", href: "/ueber" },
               { label: "Clara & Äffchen", href: "/buecher/clara-und-aeffchen" },
+              { label: "Iridologie", href: "/buecher/iridologie" },
+              { label: "Friedas Abenteuer", href: "/buecher/frieda-malbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>
