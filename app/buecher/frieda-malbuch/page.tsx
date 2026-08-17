@@ -386,6 +386,7 @@ export default function FriedaMalbuchPage() {
               { label: "Autor", href: "/autor" },
               { label: "Clara & Äffchen", href: "/buecher/clara-und-aeffchen" },
               { label: "Iridologie", href: "/buecher/iridologie" },
+              { label: "#ZFA Arbeitsbuch", href: "/buecher/zfa-arbeitsbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>

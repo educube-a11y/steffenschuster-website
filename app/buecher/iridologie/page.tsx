@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Nav } from "@/components/Nav";
 import { ScrollRevealInit } from "@/components/ScrollRevealInit";
 import { TiltCard } from "@/components/TiltCard";
@@ -35,11 +36,13 @@ export const metadata: Metadata = {
     title: "Iridologie – Interpretation der Zeichen des Auges",
     description:
       "Fachbuch von Vistara Haiduk-Kaplan und Steffen Schuster (Co-Autor): über 60 Irisdeutungszeichen, Konstitutionstypen und praktische Anleitung zur Selbstbeobachtung.",
+    images: [{ url: "/buecher/iridologie/og-iridologie.jpg", width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Iridologie – Interpretation der Zeichen des Auges",
     description: "Fachbuch von Vistara Haiduk-Kaplan und Steffen Schuster (Co-Autor). Erhältlich bei Amazon.",
+    images: ["/buecher/iridologie/og-iridologie.jpg"],
   },
 };
 
@@ -94,26 +97,6 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
 };
-
-function IrisMotif({ size = 320 }: { size?: number }) {
-  return (
-    <div
-      aria-hidden
-      style={{
-        position: "relative",
-        width: "100%",
-        maxWidth: size,
-        aspectRatio: "1/1",
-        margin: "0 auto",
-        borderRadius: "50%",
-        background: `repeating-conic-gradient(from 0deg, ${GOLD}40 0deg 4deg, ${INK}28 4deg 8deg)`,
-        boxShadow: `0 30px 70px rgba(47,69,56,0.35), inset 0 0 0 16px ${PAPER}, inset 0 0 0 19px ${GOLD}80, inset 0 0 0 58px ${PAPER}, inset 0 0 0 61px ${INK}55`,
-      }}
-    >
-      <div style={{ position: "absolute", inset: "38%", borderRadius: "50%", background: INK, boxShadow: `inset 0 0 20px rgba(0,0,0,0.5)` }} />
-    </div>
-  );
-}
 
 export default function IridologiePage() {
   return (
@@ -175,7 +158,27 @@ export default function IridologiePage() {
               </div>
             </div>
             <div data-reveal>
-              <IrisMotif />
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  maxWidth: 360,
+                  margin: "0 auto",
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  boxShadow: "0 30px 70px rgba(47,69,56,0.35)",
+                  aspectRatio: "700/1107",
+                }}
+              >
+                <Image
+                  src="/buecher/iridologie/cover.jpg"
+                  alt="Buchcover: Iridologie – Interpretation der Zeichen des Auges, von Vistara Haiduk-Kaplan und Steffen Schuster"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  priority
+                  sizes="360px"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -330,6 +333,7 @@ export default function IridologiePage() {
               { label: "Autor", href: "/autor" },
               { label: "Clara & Äffchen", href: "/buecher/clara-und-aeffchen" },
               { label: "Friedas Abenteuer", href: "/buecher/frieda-malbuch" },
+              { label: "#ZFA Arbeitsbuch", href: "/buecher/zfa-arbeitsbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>

@@ -12,6 +12,8 @@ const PAPER = "#fffaf0";
 const SOFT = "#eaf3f5";
 const GOLD = "#b68d40";
 const IRIS_INK = "#2f4538";
+const ZFA_NAVY = "#213e70";
+const ZFA_ACCENT = "#e0781a";
 const SITE_URL = "https://www.steffenschuster.de";
 
 export const metadata: Metadata = {
@@ -47,7 +49,7 @@ const personSchema = {
   sameAs: [SITE_URL, `${SITE_URL}/ueber`],
   jobTitle: ["Autor", "Kinderbuchautor", "Pädagoge"],
   description:
-    "Steffen Schuster ist Autor und Pädagoge. Mit der Reihe Clara & Äffchen verbindet er kindnahe Erzählkunst mit langjähriger Beschäftigung mit kindlicher Entwicklung und Anthroposophie; als Co-Autor wirkte er zudem am Fachbuch Iridologie – Interpretation der Zeichen des Auges mit.",
+    "Steffen Schuster ist Autor und Pädagoge. Mit der Reihe Clara & Äffchen verbindet er kindnahe Erzählkunst mit langjähriger Beschäftigung mit kindlicher Entwicklung und Anthroposophie; als Co-Autor wirkte er zudem am Fachbuch Iridologie – Interpretation der Zeichen des Auges mit. Als Autor und Herausgeber der #ZFA Arbeitsbuch-Reihe begleitet er zudem Auszubildende zur Zahnmedizinischen Fachangestellten.",
   knowsAbout: [
     "Kindliche Entwicklung",
     "Anthroposophie",
@@ -55,6 +57,7 @@ const personSchema = {
     "Lernen und Persönlichkeitsentwicklung",
     "Familienthemen in der Kinderliteratur",
     "Iridologie",
+    "ZFA-Ausbildung",
   ],
   hasOccupation: [
     { "@type": "Occupation", name: "Autor" },
@@ -75,6 +78,11 @@ const personSchema = {
       "@type": "Book",
       name: "Friedas fröhliches Abenteuer in der Zahnarztpraxis",
       url: `${SITE_URL}/buecher/frieda-malbuch`,
+    },
+    {
+      "@type": "BookSeries",
+      name: "#ZFA — Eine crossmediale Ausbildung zur Zahnmedizinischen Fachangestellten",
+      url: `${SITE_URL}/buecher/zfa-arbeitsbuch`,
     },
   ],
 };
@@ -121,6 +129,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Als Co-Autor wirkte Steffen Schuster gemeinsam mit Vistara Haiduk-Kaplan am Fachbuch „Iridologie – Interpretation der Zeichen des Auges“ mit. Außerdem schrieb er das Malbuch „Friedas fröhliches Abenteuer in der Zahnarztpraxis“, den ersten Band der Frieda-Malbuchserie, die Kinder spielerisch in verschiedene Berufswelten einführt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was ist die #ZFA Arbeitsbuch-Reihe von Steffen Schuster?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Steffen Schuster hat die dreibändige Arbeitsbuch-Reihe „#ZFA — Eine crossmediale Ausbildung zur Zahnmedizinischen Fachangestellten“ als Autor und Herausgeber gemeinsam mit einem Autorinnen-Team aus drei Kolleginnen entwickelt. Die Reihe deckt alle 13 Lernfelder der ZFA-Ausbildung ab und ist die analoge Übungsergänzung zum KI-Lerncoach lina-zfa auf seiner Lernplattform nora-ki.de.",
       },
     },
   ],
@@ -582,6 +598,85 @@ export default function AutorPage() {
                 </div>
               </div>
             </TiltCard>
+
+            {/* #ZFA Arbeitsbuch */}
+            <TiltCard>
+              <div
+                data-reveal
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "180px 1fr",
+                  gap: 32,
+                  alignItems: "center",
+                  background: "#fff",
+                  borderRadius: 22,
+                  border: "1px solid #e2d9c8",
+                  padding: "36px 36px",
+                  height: "100%",
+                }}
+                className="werk-card-grid"
+              >
+                <div style={{ position: "relative", width: "100%", aspectRatio: "3/4" }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      transform: "rotate(-6deg)",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      boxShadow: "0 14px 30px rgba(36,79,89,0.25)",
+                      width: "78%",
+                    }}
+                  >
+                    <Image
+                      src="/buecher/zfa-arbeitsbuch/covers/cover-lf01-04.jpg"
+                      alt="Cover: #ZFA Arbeitsbuch, Lernfelder 01–04"
+                      width={200}
+                      height={300}
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      transform: "rotate(5deg) translateX(22%)",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      boxShadow: "0 14px 30px rgba(36,79,89,0.3)",
+                      width: "78%",
+                    }}
+                  >
+                    <Image
+                      src="/buecher/zfa-arbeitsbuch/covers/cover-lf10-13.jpg"
+                      alt="Cover: #ZFA Arbeitsbuch, Lernfelder 10–13"
+                      width={200}
+                      height={300}
+                      style={{ width: "100%", height: "auto", display: "block" }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: ZFA_ACCENT, margin: "0 0 8px" }}>
+                    Arbeitsbuch-Reihe · Autor &amp; Herausgeber
+                  </p>
+                  <h3 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: 26, fontWeight: 600, margin: "0 0 10px", color: INK }}>
+                    #ZFA Arbeitsbuch
+                  </h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.65, color: "#4a5a5d", margin: "0 0 18px" }}>
+                    Dreibändige Arbeitsbuch-Reihe für die ZFA-Ausbildung —
+                    entwickelt im Autorinnen-Team, als analoge Ergänzung zum
+                    KI-Lerncoach lina-zfa.
+                  </p>
+                  <a
+                    href="/buecher/zfa-arbeitsbuch"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 14.5, fontWeight: 600, color: INK, textDecoration: "none", borderBottom: `1px solid ${ZFA_NAVY}`, paddingBottom: 2 }}
+                  >
+                    Zur Reihe →
+                  </a>
+                </div>
+              </div>
+            </TiltCard>
           </div>
         </div>
       </section>
@@ -689,6 +784,7 @@ export default function AutorPage() {
               { label: "Clara & Äffchen", href: "/buecher/clara-und-aeffchen" },
               { label: "Iridologie", href: "/buecher/iridologie" },
               { label: "Friedas Abenteuer", href: "/buecher/frieda-malbuch" },
+              { label: "#ZFA Arbeitsbuch", href: "/buecher/zfa-arbeitsbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>

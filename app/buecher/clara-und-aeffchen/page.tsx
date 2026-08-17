@@ -840,6 +840,7 @@ export default function ClaraUndAeffchenPage() {
               { label: "Autor", href: "/autor" },
               { label: "Iridologie", href: "/buecher/iridologie" },
               { label: "Friedas Abenteuer", href: "/buecher/frieda-malbuch" },
+              { label: "#ZFA Arbeitsbuch", href: "/buecher/zfa-arbeitsbuch" },
               { label: "Kontakt", href: "/kontakt" },
             ].map((l) => (
               <a key={l.label} href={l.href} style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>
