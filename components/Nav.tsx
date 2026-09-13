@@ -116,6 +116,18 @@ export function Nav() {
           </a>
           <ThemeToggle />
           <a
+            href="/blog"
+            style={{
+              color: pathname.startsWith("/blog") ? "#ff9800" : "rgba(255,255,255,0.78)",
+              textDecoration: "none",
+              fontSize: 14.5,
+              fontWeight: pathname.startsWith("/blog") ? 600 : 500,
+              letterSpacing: "0.2px",
+            }}
+          >
+            Blog
+          </a>
+          <a
             href="/kontakt#formular"
             style={{
               display: "inline-flex",
@@ -270,6 +282,21 @@ export function Nav() {
               }}
             >
               Bücher
+            </a>
+            <a
+              href="/blog"
+              onClick={() => setMenuOpen(false)}
+              style={{
+                color: pathname.startsWith("/blog") ? "#ff9800" : "rgba(255,255,255,0.8)",
+                textDecoration: "none",
+                fontSize: 22,
+                fontWeight: pathname.startsWith("/blog") ? 600 : 500,
+                padding: "12px 0",
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+                fontFamily: "var(--font-cormorant), serif",
+              }}
+            >
+              Blog
             </a>
             <div style={{ paddingTop: 24 }}>
               <a

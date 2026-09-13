@@ -471,6 +471,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── BLOG ── */}
+      <section id="blog-teaser" className="section-px" style={{ position: "relative", padding: "110px 40px", background: "var(--page-bg)" }}>
+        <div
+          style={{
+            maxWidth: 1180,
+            margin: "0 auto",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 32,
+            borderRadius: 24,
+            padding: "56px 56px",
+            background: "#0f1f2e",
+          }}
+        >
+          <div data-reveal style={{ maxWidth: 620 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
+              <span style={{ width: 28, height: 1, background: ACCENT, display: "block" }} />
+              <span style={{ color: ACCENT, fontSize: 13, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase" }}>Blog</span>
+            </div>
+            <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontWeight: 500, fontSize: "clamp(28px, 3.4vw, 42px)", lineHeight: 1.12, letterSpacing: "-0.5px", color: "#fff", margin: "0 0 18px" }}>
+              Gedanken zu Lernen, Bildung und KI.
+            </h2>
+            <p style={{ fontSize: 17, lineHeight: 1.7, color: "rgba(255,255,255,0.72)", margin: 0 }}>
+              Im Blog schreibe ich über digitale Lernumgebungen, KI in der
+              Ausbildung und Erfahrungen aus 20 Jahren Bildungsarbeit —
+              praxisnah und aus erster Hand.
+            </p>
+          </div>
+          <a
+            data-reveal
+            href="/blog"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              padding: "17px 34px",
+              borderRadius: 100,
+              background: ACCENT,
+              color: "#16212e",
+              textDecoration: "none",
+              fontSize: 16,
+              fontWeight: 600,
+              whiteSpace: "nowrap",
+            }}
+          >
+            Zum Blog <span>→</span>
+          </a>
+        </div>
+      </section>
+
       {/* ── KONTAKT ── */}
       <section id="kontakt" className="section-px" style={{ position: "relative", padding: "150px 40px", background: "radial-gradient(120% 100% at 50% 0%, #3a6892 0%, #2b5274 50%, #1b3953 100%)", overflow: "hidden", textAlign: "center" }}>
         <div style={{ position: "absolute", inset: 0, opacity: 0.4, pointerEvents: "none" }}>

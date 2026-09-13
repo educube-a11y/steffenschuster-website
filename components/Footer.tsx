@@ -36,6 +36,12 @@ export function Footer() {
           Kinderbücher
         </a>
         <a
+          href="/blog"
+          style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none" }}
+        >
+          Blog
+        </a>
+        <a
           href="https://nora-ki.de"
           target="_blank"
           rel="noopener noreferrer"

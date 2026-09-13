@@ -16,7 +16,7 @@ const PAGE_URL = `${SITE_URL}/buecher/clara-und-aeffchen`;
 export const metadata: Metadata = {
   title: "Clara & Äffchen — Kinderbuchreihe über Trennung & zwei Zuhause | Steffen Schuster",
   description:
-    "Clara & Äffchen: eine warmherzige 14-teilige Kinderbuchreihe über das Aufwachsen zwischen zwei Elternhäusern. 4 Bände erhältlich, ab 5 Jahren, exklusiv bei Amazon. Jetzt entdecken.",
+    "Clara & Äffchen: eine warmherzige 14-teilige Kinderbuchreihe über das Aufwachsen zwischen zwei Elternhäusern. 5 Bände erhältlich, ab 5 Jahren, exklusiv bei Amazon. Jetzt entdecken.",
   keywords: [
     "Clara und Äffchen",
     "Kinderbuch Trennung Eltern",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Steffen Schuster",
     title: "Clara & Äffchen — Zwei Zuhause. Viele Gefühle. Ein eigener Weg.",
     description:
-      "Eine warmherzige, spannende Kinderbuchreihe über das Aufwachsen zwischen zwei Elternhäusern. 4 von 14 Bänden erhältlich — exklusiv bei Amazon.",
+      "Eine warmherzige, spannende Kinderbuchreihe über das Aufwachsen zwischen zwei Elternhäusern. 5 von 14 Bänden erhältlich — exklusiv bei Amazon.",
     images: [{ url: "/buecher/clara-und-aeffchen/og-clara-und-aeffchen.jpg", width: 1200, height: 630 }],
   },
   twitter: {
@@ -51,6 +51,7 @@ const AMAZON = {
   band2: "https://www.amazon.de/dp/B0HDLDNLXD",
   band3: "https://www.amazon.de/dp/B0HDNTP6TP",
   band4: "https://www.amazon.de/dp/B0HFK7Y5FH",
+  band5: "https://www.amazon.de/dp/B0HGJ2CDD1",
 };
 
 type BandStatus = "erhaeltlich" | "in_vorbereitung" | "geplant";
@@ -116,6 +117,18 @@ const baende: Band[] = [
     status: "erhaeltlich",
     link: AMAZON.band4,
   },
+  {
+    nr: 5,
+    alter: 9,
+    titel: "Clara und das Zimmer für morgen",
+    untertitel: "Wenn ein Babyzimmer entsteht",
+    teaser:
+      "Bei Papa und Lene kündigt sich ein Baby an. Gleichzeitig endet Claras Grundschulzeit und die Leopoldschule rückt näher. Als für die neue Wohnung ein Babyzimmer geplant wird, stellt Clara die Frage, die sie nicht loslässt: Bleibt bei Papa wirklich ein eigener Platz für sie? Zwischen Fußballtor, Abschiedsfest, zwei Zimmertüren und Äffchens behutsamer Reparatur entdeckt Clara, dass Freude und Eifersucht nebeneinander bestehen dürfen.",
+    kaufimpuls: "Eine stärkende und humorvolle Geschichte für Trennungskinder, die ein Geschwisterbaby, einen Umzug oder einen Schulwechsel erleben.",
+    cover: "/buecher/clara-und-aeffchen/covers/cover-band-5.jpg",
+    status: "erhaeltlich",
+    link: AMAZON.band5,
+  },
 ];
 
 const figuren = [
@@ -144,11 +157,11 @@ const faqItems = [
   },
   {
     q: "Wie viele Bände wird es geben?",
-    a: "Clara & Äffchen ist auf 14 Bände angelegt und begleitet Clara von der Kita bis zum Abitur und dem Auszug mit 18 Jahren. Aktuell sind die Bände 1 bis 4 erhältlich.",
+    a: "Clara & Äffchen ist auf 14 Bände angelegt und begleitet Clara von der Kita bis zum Abitur und dem Auszug mit 18 Jahren. Aktuell sind die Bände 1 bis 5 erhältlich.",
   },
   {
-    q: "Wann erscheint Band 5?",
-    a: "Ein Erscheinungstermin für Band 5 steht noch nicht fest. Sobald ein neuer Band angekündigt ist, wird diese Seite aktualisiert.",
+    q: "Wann erscheint Band 6?",
+    a: "Ein Erscheinungstermin für Band 6 steht noch nicht fest. Sobald ein neuer Band angekündigt ist, wird diese Seite aktualisiert.",
   },
   {
     q: "Wo kann ich Clara & Äffchen kaufen?",
@@ -271,7 +284,7 @@ export default function ClaraUndAeffchenPage() {
                 Gesprächsbrücke für Familien.
               </p>
               <div data-reveal style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 34 }}>
-                {["4 von 14 Bänden erhältlich", "Ab 5 Jahren", "Exklusiv bei Amazon"].map((tag) => (
+                {["5 von 14 Bänden erhältlich", "Ab 5 Jahren", "Exklusiv bei Amazon"].map((tag) => (
                   <span
                     key={tag}
                     style={{
@@ -328,7 +341,7 @@ export default function ClaraUndAeffchenPage() {
 
             <div data-reveal style={{ position: "relative" }}>
               <div style={{ display: "flex", justifyContent: "center", position: "relative", height: "clamp(320px, 40vw, 460px)" }}>
-                {baende.slice(0, 3).map((b, i) => (
+                {baende.slice(-3).map((b, i) => (
                   <div
                     key={b.nr}
                     style={{
@@ -444,7 +457,7 @@ export default function ClaraUndAeffchenPage() {
 
           <div data-reveal style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {Array.from({ length: 14 }, (_, i) => i + 1).map((nr) => {
-              const status = nr <= 4 ? "erhaeltlich" : "geplant";
+              const status = nr <= 5 ? "erhaeltlich" : "geplant";
               const bg = status === "erhaeltlich" ? WARM : "rgba(255,255,255,0.07)";
               const color = status === "geplant" ? "rgba(255,255,255,0.4)" : "#fff";
               return (

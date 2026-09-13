@@ -469,8 +469,8 @@ export default function AutorPage() {
                     }}
                   >
                     <Image
-                      src="/buecher/clara-und-aeffchen/covers/cover-band-4.jpg"
-                      alt="Cover Band 4: Clara und die zwei Wochen"
+                      src="/buecher/clara-und-aeffchen/covers/cover-band-5.jpg"
+                      alt="Cover Band 5: Clara und das Zimmer für morgen"
                       width={200}
                       height={320}
                       style={{ width: "100%", height: "auto", display: "block" }}
